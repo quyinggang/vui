@@ -16,14 +16,14 @@ module.exports = {
     'standard'
   ],
   // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
+  plugins: ['vue'],
   // add your custom rules here
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // 分号
+    "semi": ["error", "always"],
+    // 空格缩进
+    "indent": ["error", 2, {SwitchCase: 1}]
   }
 }
