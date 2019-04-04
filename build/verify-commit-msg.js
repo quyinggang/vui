@@ -14,8 +14,9 @@ const msg = fs.readFileSync(msgPath, 'utf-8').trim();
  * chore: 依赖相关
  * build: 编译相关
  * revert: 回退版本
+ * comment: 注释
  */
-const commitRegex = /^(feat|fix|docs|refactor|perf|test|ci|chore|build|revert)(\(.+\))?:.{1,50}/;
+const commitRegex = /^(feat|fix|docs|refactor|perf|test|ci|chore|build|revert|comment)(\(.+\))?:.{1,50}/;
 
 if (!commitRegex.test(msg)) {
   console.log();
