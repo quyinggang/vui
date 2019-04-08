@@ -7,14 +7,18 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 抽取CSS形成单独文件插件
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// 压缩css插件
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+// 压缩JS插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
+    // Style loader相关处理
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
@@ -32,6 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    // JS压缩
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
@@ -41,32 +46,28 @@ const webpackConfig = merge(baseWebpackConfig, {
       sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
-    // extract css into its own file
+    // 抽取CSS到单独文件中
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
-      // Setting the following option to `false` will not extract CSS from codesplit chunks.
-      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
-      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
     }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
+    // 优化CSS
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
+    // 动态生成HTML
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
       inject: true,
       minify: {
+        // 移除注释
         removeComments: true,
+        // 删除空格
         collapseWhitespace: true,
+        // 属性双引号
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
@@ -74,15 +75,15 @@ const webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    // keep module.id stable when vendor modules does not change
+    // 根据模块的相对路径生成四位数hash作为模块id，用于避免vendor hash变化
     new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
+    // 提升或预编译模块
     new webpack.optimize.ModuleConcatenationPlugin(),
-    // split vendor js into its own file
+    // 抽取第三方库到vendor
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
-        // any required modules inside node_modules are extracted to vendor
+        // 引入node_modules中模块会被抽取
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -92,23 +93,22 @@ const webpackConfig = merge(baseWebpackConfig, {
         )
       }
     }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
+    /**
+     * 抽取manifest（manifest文件包含了加载和处理模块的逻辑，防止vendor重复编译）
+     * 实际上就是将webpackJsonp和__webpack__require__逻辑抽离出来
+     */
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity
     }),
-    // This instance extracts shared chunks from code splitted chunks and bundles them
-    // in a separate chunk, similar to the vendor chunk
-    // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
+    // 当不同异步加载模块中引用相同模块3次以上就会抽离引用模块为公共模块，防止重复打包
     new webpack.optimize.CommonsChunkPlugin({
       name: 'app',
       async: 'vendor-async',
       children: true,
       minChunks: 3
     }),
-
-    // copy custom static assets
+    // 拷贝static目录到输出目录
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
@@ -119,6 +119,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
+// 开启gzip压缩，该插件会提供压缩版本
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
@@ -137,6 +138,7 @@ if (config.build.productionGzip) {
   )
 }
 
+// 可视化输出文件大小
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())

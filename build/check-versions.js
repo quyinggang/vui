@@ -1,7 +1,9 @@
 'use strict'
 const chalk = require('chalk')
+// 版本命名规范检查
 const semver = require('semver')
 const packageConfig = require('../package.json')
+// 跨平台shell实现
 const shell = require('shelljs')
 
 function exec (cmd) {
@@ -24,6 +26,7 @@ if (shell.which('npm')) {
   })
 }
 
+// 检查node和npm版本
 module.exports = function () {
   const warnings = []
 

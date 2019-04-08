@@ -4,6 +4,7 @@
 
 const path = require('path')
 
+// 定义开发环境和生产环境相关配置
 module.exports = {
   dev: {
 
