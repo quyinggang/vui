@@ -25,6 +25,7 @@ module.exports = {
     "semi": ["error", "always"],
     // 空格缩进
     "indent": ["error", 2, {SwitchCase: 1}],
+    // 非箭头函数函数名前不允许有空格
     "space-before-function-paren": ["error", {
       "anonymous": "never",
       "named": "never",
