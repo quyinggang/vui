@@ -26,6 +26,8 @@ module.exports = {
     // 空格缩进
     "indent": ["error", 2, {SwitchCase: 1}],
     "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
       "asyncArrow": "always"
     }]
   }
