@@ -18,7 +18,7 @@ export default {
     }
   },
   computed: {
-    getClasses () {
+    getClasses() {
       const type = this.type;
       const size = this.size;
       return [
@@ -29,7 +29,7 @@ export default {
     }
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.$emit('click');
     }
   }
