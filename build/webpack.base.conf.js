@@ -1,12 +1,16 @@
 'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+
+const path = require('path');
+const utils = require('./utils');
+const config = require('./env-config');
+
+const sourceMap = process.env.NODE_ENV === 'production'
+    ? config.build.productionSourceMap
+    : config.dev.cssSourceMap;
 
 // 返回指定目录的绝对路径
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '..', dir);
 }
 
 const createLintingRule = () => ({
@@ -22,26 +26,11 @@ const createLintingRule = () => ({
     // 是否显示警告信息
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
-})
+});
 
 module.exports = {
   // 绝对路径的基础目录即解析entry和loader的目录，默认当前目录
   context: path.resolve(__dirname, '../'),
-  // 入口
-  entry: {
-    app: './src/main.js'
-  },
-  // 输出
-  output: {
-    // 指定编译输出目录
-    path: config.build.assetsRoot,
-    // 输出文件名称
-    filename: '[name].js',
-    // 配置输出目录对应的公开URL
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
-  },
   // 模块解析规则
   resolve: {
     // 省略模块扩展匹配规则
@@ -59,7 +48,21 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: {
+          sourceMap: sourceMap,
+          // vue-loader参数：是否开启CSS source maps
+          cssSourceMap: sourceMap,
+          // vue-loader参数：是否要缓存文件，可以让浏览器不缓存，即动态生成文件中加入hash就会让每一次构建的文件都不同
+          cacheBusting: config.dev.cacheBusting,
+          // 解决Vue中src需要使用require先导入的问题，这里统一配置
+          transformToRequire: {
+            video: ['src', 'poster'],
+            source: 'src',
+            img: 'src',
+            // svg的image标签
+            image: 'xlink:href'
+          }
+        }
       },
       {
         test: /\.js$/,
@@ -75,21 +78,20 @@ module.exports = {
         }
       },
       {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('media/[name].[hash:7].[ext]')
-        }
-      },
-      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.scss$/,
+        loader: 'scss-loader',
+        options: {
+          sourceMap: sourceMap
+        }
       }
     ]
   }
-}
+};

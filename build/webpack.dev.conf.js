@@ -2,13 +2,11 @@
 const utils = require('./utils')
 const webpack = require('webpack')
 const path = require('path')
-const config = require('../config')
+const config = require('./env-config')
 // 公用webpack配置
 const baseWebpackConfig = require('./webpack.base.conf')
 // webpack配置文件合并插件
 const merge = require('webpack-merge')
-// 复制插件
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 生成HTML插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 清理webpack编译输出的信息
@@ -21,10 +19,20 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-  // 定义对模块源代码转换的loader
-  module: {
-    // 重新定义Style相关的loader
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    // 入口
+  entry: {
+    app: './examples/src/main.js'
+  },
+  // 输出
+  output: {
+    // 指定编译输出目录
+    path: config.build.assetsRoot,
+    // 输出文件名称
+    filename: '[name].js',
+    // 配置输出目录对应的公开URL
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
   },
   /**
    *  选择source map，用于开发环境的增强调试
@@ -76,7 +84,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // 允许在编译时配置全局常量，对于区分生产和开发环境定制不同行为非常有用
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env.NODE_ENV': JSON.stringify('development')
     }),
     // 启用模块热替换
     new webpack.HotModuleReplacementPlugin(),
@@ -89,15 +97,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'index.html',
       inject: true
-    }),
-    // 文件复制插件，常用于将文件复制到编译后的目录中
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.dev.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
+    })
   ]
 })
 

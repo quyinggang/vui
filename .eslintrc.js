@@ -24,6 +24,9 @@ module.exports = {
     // 分号
     "semi": ["error", "always"],
     // 空格缩进
-    "indent": ["error", 2, {SwitchCase: 1}]
+    "indent": ["error", 2, {SwitchCase: 1}],
+    "space-before-function-paren": ["error", {
+      "asyncArrow": "always"
+    }]
   }
 }
