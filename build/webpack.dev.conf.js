@@ -1,22 +1,25 @@
 'use strict'
-const utils = require('./utils')
-const webpack = require('webpack')
-const path = require('path')
-const config = require('./env-config')
-// 公用webpack配置
-const baseWebpackConfig = require('./webpack.base.conf')
-// webpack配置文件合并插件
-const merge = require('webpack-merge')
-// 生成HTML插件
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 清理webpack编译输出的信息
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-// 端口扫描
-const portfinder = require('portfinder')
 
-// 获取域名和端口
-const HOST = process.env.HOST
-const PORT = process.env.PORT && Number(process.env.PORT)
+const webpack = require('webpack');
+const path = require('path');
+const config = require('./env-config');
+const chalk = require('chalk');
+// 公用webpack配置
+const baseWebpackConfig = require('./webpack.base.conf');
+// webpack配置文件合并插件
+const merge = require('webpack-merge');
+// 生成HTML插件
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// 清理webpack编译输出的信息
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+
+/*
+  官网只有两个环境：生产环境和开发环境，在deploy-build中定义了生产环境
+  调npm run dev命令时就是非生产环境，即开发环境
+*/
+const isProd = process.env.NODE_ENV === 'production';
 
 const devWebpackConfig = merge(baseWebpackConfig, {
     // 入口
@@ -26,13 +29,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // 输出
   output: {
     // 指定编译输出目录
-    path: config.build.assetsRoot,
+    path: path.resolve(__dirname, '../examples/homepage'),
     // 输出文件名称
     filename: '[name].js',
     // 配置输出目录对应的公开URL
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: ''
   },
   /**
    *  选择source map，用于开发环境的增强调试
@@ -59,19 +60,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 是否启用gzip压缩
     compress: true,
     // 域名，默认是localhost，如果希望服务器外部可访问，设置为0.0.0.0
-    host: HOST || config.dev.host,
+    host: config.dev.host,
     // 端口
-    port: PORT || config.dev.port,
+    port: config.dev.port,
     // 是否允许server打开浏览器
-    open: config.dev.autoOpenBrowser,
+    open: true,
     // 是否在浏览器中显示编译器错误或警告
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
-    // 可在浏览器中访问的打包文件，默认是/
-    publicPath: config.dev.assetsPublicPath,
-    // 设置代理，主要用于解决前后端分离时跨域问题
-    proxy: config.dev.proxyTable,
     // webpack错误或警告在控制台是否不显示，true表示不显示
     quiet: true,
     // 定制watch模式的选项
@@ -82,7 +79,49 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   // 插件使用
   plugins: [
-    // 允许在编译时配置全局常量，对于区分生产和开发环境定制不同行为非常有用
+    // 动态生成HTML
+    new HtmlWebpackPlugin({
+      filename: './index.html',
+      template: './examples/index.html',
+      inject: true,
+      minify: {
+        // 移除注释
+        removeComments: true,
+        // 删除空格
+        collapseWhitespace: true,
+        // 属性双引号
+        removeAttributeQuotes: true
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
+    })
+  ]
+})
+
+if (isProd) {
+  devWebpackConfig.externals = {
+    vue: 'Vue'
+  };
+
+  devWebpackConfig.plugins.push(
+    new ProgressBarPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    // 压缩JS
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
+    })
+  );
+} else {
+  const devServer = devWebpackConfig.devServer;
+  devWebpackConfig.plugins.push(
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
@@ -92,38 +131,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(),
     // webpack编译出现错误使用该插件跳过输出阶段，保证输出资源不会包含错误
     new webpack.NoEmitOnErrorsPlugin(),
-    // 动态生成html
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
+    new FriendlyErrorsPlugin({
+      // 编译成功后的提示
+      compilationSuccessInfo: {
+        messages: [`Running: http://${devServer.host}:${devServer.port}`],
+      },
+      // 错误信息
+      onErrors: (severity, errors) => {
+        console.log(chalk.red(severity + errors.toString()));
+      }
     })
-  ]
-})
+  );
+}
 
-module.exports = new Promise((resolve, reject) => {
-  portfinder.basePort = process.env.PORT || config.dev.port
-  // 端口扫描，当指定端口被占用，自动跳转到下一个端口
-  portfinder.getPort((err, port) => {
-    if (err) {
-      reject(err)
-    } else {
-      process.env.PORT = port
-      devWebpackConfig.devServer.port = port
-
-      // 控制台输出信息控制插件friendly-errors-webpack-plugin
-      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
-        // 编译成功后的提示
-        compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
-        },
-        // 错误信息
-        onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
-      }))
-
-      resolve(devWebpackConfig)
-    }
-  })
-})
+module.exports = devWebpackConfig;
