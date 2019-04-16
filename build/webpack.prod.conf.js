@@ -7,6 +7,7 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 // 压缩JS插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const webpackConfig = merge(baseWebpackConfig, {
     // 入口
@@ -22,6 +23,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     umdNamedDefine: true
   },
   plugins: [
+    new ProgressBarPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
