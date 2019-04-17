@@ -5,7 +5,7 @@
   "author": "yinggang.qu@gmail.com",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "deploy:build": "node build/deploy-build.js",
+    "deploy:build": "rimraf examples/homepage && node build/deploy-build.js && gh-pages -d examples/homepage",
     "lint": "eslint --ext .js,.vue src",
     "clean": "rimraf dist",
     "build:style": "gulp build --gulpfile build/build-style.js",
@@ -58,6 +58,7 @@
     "eslint-plugin-vue": "^4.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "gh-pages": "^2.0.1",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-cssmin": "^0.2.0",
