@@ -31,7 +31,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 指定编译输出目录
     path: path.resolve(__dirname, '../examples/homepage'),
     // 输出文件名称
-    filename: '[name].js',
+    filename: '[name].[chunkHash].js',
     // 配置输出目录对应的公开URL
     publicPath: ''
   },
@@ -99,10 +99,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 })
 
 if (isProd) {
-  devWebpackConfig.externals = {
-    vue: 'Vue'
-  };
-
   devWebpackConfig.plugins.push(
     new ProgressBarPlugin(),
     new webpack.DefinePlugin({
@@ -117,7 +113,25 @@ if (isProd) {
         comments: false
       },
       sourceMap: false
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js',
+      minChunks (module) {
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules')
+          ) === 0
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      filename: 'manifest.js',
+      minChunks: Infinity
+    }),
   );
 } else {
   const devServer = devWebpackConfig.devServer;
