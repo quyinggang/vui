@@ -10,6 +10,10 @@ function install(Vue) {
   });
 }
 
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}
+
 module.exports.default = module.exports = {
   install,
   Button

@@ -34,12 +34,18 @@ const components = [
 ];
 `;
 
-// install函数模板
+// Vue插件install函数模板
 const install = function install(Vue) {
   components.forEach(component => {
     Vue.component(component.name, component);
   });
 };
+
+// 浏览器环境直接通过script引入Vue自动安装函数模板
+const autoInstallTemplate = `
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}`;
 
 // 导出模板
 const createExportTemplate = function() {
@@ -56,6 +62,7 @@ const getTotalTemplate = function() {
     importTemplate,
     defineTemplate,
     install.toString(),
+    autoInstallTemplate, 
     createExportTemplate()
   ];
   allTemplates.forEach((tpl, i) => {
