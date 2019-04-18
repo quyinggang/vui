@@ -1,8 +1,15 @@
 'use strict'
 
 const path = require('path');
-const utils = require('./utils');
 const config = require('./env-config');
+
+function assetsPath(_path) {
+  const assetsSubDirectory = process.env.NODE_ENV === 'production'
+    ? config.build.assetsSubDirectory
+    : config.dev.assetsSubDirectory
+
+  return path.posix.join(assetsSubDirectory, _path)
+}
 
 const sourceMap = process.env.NODE_ENV === 'production'
     ? config.build.productionSourceMap
@@ -74,7 +81,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: assetsPath('img/[name].[hash:7].[ext]')
         }
       },
       {
@@ -82,7 +89,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
       {

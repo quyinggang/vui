@@ -8,14 +8,14 @@ var cssmin = require('gulp-cssmin');
 var config = require('./env-config');
 
 gulp.task('compile', function() {
-  return gulp.src('../packages/themes/*.scss')
+  return gulp.src('../packages/themes/index.scss')
     .pipe(sass.sync())
     .pipe(autoprefixer({
       browsers: ['ie > 9', 'last 2 versions'],
       cascade: false }
     ))
     .pipe(cssmin())
-    .pipe(gulp.dest(path.resolve(__dirname, config.build.assetsRoot + '/themes')));
+    .pipe(gulp.dest(path.resolve(__dirname, config.build.assetsRoot)));
 });
 
 gulp.task('build', gulp.series('compile'));
