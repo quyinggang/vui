@@ -1,0 +1,25 @@
+# 返回值非0（即未成功）就停止执行脚本
+set -e
+echo "[Vui UI for Vue 2.0] Enter release version:"
+read VERSION
+
+# 再次确认
+read -p "Releasing $VERSION - are you sure?（y/n）" 
+echo
+# 确定就执行相关命令，$REPLY是保存read命令的默认变量
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Releasing $VERSION ..."
+  npm run build
+
+  # 提交编译后的当前分支代码
+  git add -A
+  git commit -m "build: release $VERSION"
+  # 回写版本号到package.json
+  npm version $VERSION
+  git push origin master
+
+  # 发布npm包
+  # npm publish
+  echo "Release complete"
+fi
