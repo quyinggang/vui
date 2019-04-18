@@ -1,4 +1,6 @@
-
+/**
+ * 检查commit提交信息的合法性
+ */
 const chalk = require('chalk');
 const msgPath = process.env.GIT_PARAMS;
 const fs = require('fs');

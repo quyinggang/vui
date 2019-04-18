@@ -13,7 +13,7 @@ const endIndex = componentNames.length - 1;
 let formatComponentNames = [];
 let importTemplate = '';
 
-// 生成导入组件模板
+// 生成导入组件模板文本
 componentNames.forEach((name, i) => {
   const componentName = uppercamelcase(name);
   formatComponentNames.push(componentName);
@@ -27,27 +27,27 @@ const formatArray = function(data) {
 };
 formatComponentNames = formatArray(formatComponentNames);
 
-// 生成components变量定义模板
+// 生成components变量定义模板文本
 const defineTemplate = `
 const components = [
   ${formatComponentNames}
 ];
 `;
 
-// Vue插件install函数模板
+// Vue插件install函数模板文本
 const install = function install(Vue) {
   components.forEach(component => {
     Vue.component(component.name, component);
   });
 };
 
-// 浏览器环境直接通过script引入Vue自动安装函数模板
+// 浏览器环境直接通过script引入Vue自动安装函数模板文本
 const autoInstallTemplate = `
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }`;
 
-// 导出模板
+// 导出模板文本
 const createExportTemplate = function() {
   return `
 module.exports.default = module.exports = {

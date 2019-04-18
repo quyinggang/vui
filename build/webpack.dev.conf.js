@@ -1,5 +1,7 @@
 'use strict'
-
+/**
+ * 官网项目即examples目录下项目：本地以及生产配置文件
+ */
 const webpack = require('webpack');
 const path = require('path');
 const config = require('./env-config');

@@ -1,5 +1,7 @@
 'use strict'
-
+/**
+ * vui库打包编译配置文件
+ */
 const webpack = require('webpack')
 const config = require('./env-config')
 const merge = require('webpack-merge')
@@ -22,6 +24,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     umdNamedDefine: true
   },
   plugins: [
+    // 编译进度插件
     new ProgressBarPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

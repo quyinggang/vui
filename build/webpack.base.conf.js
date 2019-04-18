@@ -1,5 +1,7 @@
 'use strict'
-
+/**
+ * webpack公共配置
+ */
 const path = require('path');
 const config = require('./env-config');
 
