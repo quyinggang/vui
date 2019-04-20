@@ -20,6 +20,6 @@ then
   git push origin master
 
   # 发布npm包
-  # npm publish
+  npm publish
   echo "Release complete"
 fi
