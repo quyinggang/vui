@@ -1,6 +1,6 @@
 {
   "name": "vui-lib",
-  "version": "0.0.1",
+  "version": "0.1.3",
   "description": "A Library For Vu2.0(just learn)",
   "main": "dist/vui.js",
   "style": "dist/index.css",
