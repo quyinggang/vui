@@ -1,5 +1,5 @@
 {
-  "name": "vui",
+  "name": "vui-lib",
   "version": "0.0.1",
   "description": "A Library For Vu2.0(just learn)",
   "main": "dist/vui.js",
