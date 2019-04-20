@@ -9,14 +9,14 @@ echo
 # 确定就执行相关命令，$REPLY是保存read命令的默认变量
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  echo "Releasing $VERSION ..."
+  echo "Releasing v$VERSION ..."
   npm run build
 
   # 提交编译后的当前分支代码
   git add -A
-  git commit -m "build: release $VERSION"
+  git commit -m "build: release v$VERSION"
   # 回写版本号到package.json
-  npm version $VERSION
+  npm version $VERSION --message "build: change version to v$VERSION"
   git push origin master
 
   # 发布npm包

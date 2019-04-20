@@ -5,6 +5,11 @@
   "main": "dist/vui.js",
   "style": "dist/index.css",
   "author": "yinggang.qu@gmail.com",
+  "files": [
+    "dist",
+    "src",
+    "packages"
+  ],
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "deploy:build": "rimraf examples/homepage && node build/deploy-build.js && gh-pages -d examples/homepage",
