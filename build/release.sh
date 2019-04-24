@@ -23,6 +23,7 @@ then
   npm publish
 
   # 发布新版本后更新CHANGELOG
+  npm run changelog
   git add -A
   git commit -m 'docs: CHANGELOG.md'
   git push origin master
