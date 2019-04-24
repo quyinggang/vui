@@ -21,5 +21,11 @@ then
 
   # 发布npm包
   npm publish
+
+  # 发布新版本后更新CHANGELOG
+  git add -A
+  git commit -m 'docs: CHANGELOG.md'
+  git push origin master
+  
   echo "Release complete"
 fi
