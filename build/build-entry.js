@@ -50,7 +50,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 // 导出模板文本
 const createExportTemplate = function() {
   return `
-module.exports.default = module.exports = {
+export default {
   install,
   ${formatComponentNames}
 };`;
