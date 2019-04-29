@@ -14,7 +14,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports.default = module.exports = {
+export default {
   install,
   Button
 };

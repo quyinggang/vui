@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <h3>just do it</h3>
-    <p>Vui库正在持续搭建中...</p>
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
-};
-</script>
+<style lang="scss">
+body {
+  margin: 0;
+  #app {
+    padding: 0;
+    margin: 0;
+  }
+}
+</style>

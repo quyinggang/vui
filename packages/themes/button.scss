@@ -19,4 +19,24 @@
   transition: .1s;
   user-select: none;
   cursor: pointer;
+  &:focus,
+  &:hover {
+    color: #1989FA;
+    border-color: #badcfe;
+    background-color: #e8f3ff;
+  }
+}
+
+.el-button--text {
+  border-color: transparent;
+  color: #1989FA;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  &:focus,
+  &:hover {
+    color: #409eff;
+    border-color: transparent;
+    background: transparent;
+  }
 }

@@ -15,7 +15,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 清理webpack编译输出的信息
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 /*
   官网只有两个环境：生产环境和开发环境，在deploy-build中定义了生产环境
@@ -33,7 +32,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 指定编译输出目录
     path: path.resolve(__dirname, '../examples/homepage'),
     // 输出文件名称
-    filename: '[name].[chunkHash].js',
+    filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     // 配置输出目录对应的公开URL
     publicPath: ''
   },

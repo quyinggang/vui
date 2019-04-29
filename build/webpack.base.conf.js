@@ -46,8 +46,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     // 模块别名
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      main: resolve('src'),
+      packages: resolve('packages')
     }
   },
   module: {
@@ -96,11 +96,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'scss-loader',
-        options: {
-          sourceMap: sourceMap
-        }
-      }
+        loader: ['style-loader', 'css-loader', 'sass-loader']
+      },
     ]
   }
 };
