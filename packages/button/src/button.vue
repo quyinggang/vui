@@ -1,5 +1,9 @@
 <template>
-  <button :class="getClasses" @click="handleBtnClick">
+  <button
+    :class="getClasses"
+    :disabled="disabled"
+    @click="handleBtnClick"
+  >
     <slot></slot>
   </button>
 </template>
@@ -8,13 +12,29 @@
 export default {
   name: 'ElButton',
   props: {
+    size: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: 'default'
     },
-    size: {
-      type: String,
-      default: ''
+    round: {
+      type: Boolean,
+      default: false
+    },
+    circle: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -24,7 +44,9 @@ export default {
       return [
         'el-button',
         type ? 'el-button--' + type : '',
-        size ? 'el-button--' + size : ''
+        size ? 'el-button--' + size : '',
+        this.round ? 'el-button--round' : '',
+        this.circle ? 'el-button--circle' : ''
       ];
     }
   },
