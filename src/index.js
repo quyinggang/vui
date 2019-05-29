@@ -1,7 +1,19 @@
 import Button from '../packages/button/index.js';
+import ButtonGroup from '../packages/button-group/index.js';
+import Content from '../packages/content/index.js';
+import Header from '../packages/header/index.js';
+import Aside from '../packages/aside/index.js';
+import Footer from '../packages/footer/index.js';
+import Layout from '../packages/layout/index.js';
 
 const components = [
-  Button
+  Button,
+  ButtonGroup,
+  Content,
+  Header,
+  Aside,
+  Footer,
+  Layout
 ];
 
 function install(Vue) {
@@ -16,5 +28,11 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  Button
+  Button,
+  ButtonGroup,
+  Content,
+  Header,
+  Aside,
+  Footer,
+  Layout
 };

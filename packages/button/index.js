@@ -1,6 +1,6 @@
-import ElButton from './src/button';
+import ElButton from './button';
 
-ElButton.install = function (Vue) {
+ElButton.install = function(Vue) {
   Vue.component(ElButton.name, ElButton);
 };
 

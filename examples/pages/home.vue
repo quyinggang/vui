@@ -6,7 +6,7 @@
         VUI
       </div>
       <div class="nav--right">
-        <el-button type="text">组件</el-button>
+        <el-button type="text" @click="handleRouteJump">组件</el-button>
       </div>
     </header>
     <article>
@@ -14,6 +14,16 @@
     </article>
   </main>
 </template>
+
+<script>
+export default {
+  methods: {
+    handleRouteJump() {
+      this.$router.push({ path: '/component' });
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .main {

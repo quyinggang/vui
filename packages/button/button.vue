@@ -1,6 +1,13 @@
 <template>
   <button
-    :class="getClasses"
+    :class="[
+      'el-button',
+      type ? 'el-button--' + type : '',
+      size ? 'el-button--' + size : '',
+      round ? 'el-button--round' : '',
+      circle ? 'el-button--circle' : '',
+      customClass
+    ]"
     :disabled="disabled"
     @click="handleBtnClick"
   >
@@ -14,11 +21,15 @@ export default {
   props: {
     size: {
       type: String,
-      default: ''
+      validator: (value) => {
+        return ['mini', 'small', 'medium'].includes(value);
+      }
     },
     type: {
       type: String,
-      default: 'default'
+      validator: (value) => {
+        return ['primary', 'info', 'warning', 'success', 'danger', 'text'].includes(value);
+      }
     },
     round: {
       type: Boolean,
@@ -35,20 +46,8 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    }
-  },
-  computed: {
-    getClasses() {
-      const type = this.type;
-      const size = this.size;
-      return [
-        'el-button',
-        type ? 'el-button--' + type : '',
-        size ? 'el-button--' + size : '',
-        this.round ? 'el-button--round' : '',
-        this.circle ? 'el-button--circle' : ''
-      ];
-    }
+    },
+    customClass: String
   },
   methods: {
     handleBtnClick() {

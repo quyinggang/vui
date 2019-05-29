@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.el-layout {
+  display: flex;
+  &.is-vertical {
+    flex-direction: column;
+  }
+  &.is-horizontal {
+    flex-direction: row;
+  }
+}
+
+.el-header,
+.el-footer {
+  padding: 0 $padding-lr;
+  line-height: 1;
+  &.is-center {
+    text-align: center;
+  }
+  &.is-left {
+    text-align: left;
+  }
+  &.is-right {
+    text-align: right;
+  }
+}
+
+.el-aside {
+  padding: $padding-tb 0;
+}
+
+.el-content {
+  padding: $padding-tb $padding-lr;
+}
