@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <header class="header">
+    <el-header class="header">
       <div class="nav--left">
         <img />
         VUI
@@ -8,7 +8,7 @@
       <div class="nav--right">
         <el-button type="text" @click="handleRouteJump">组件</el-button>
       </div>
-    </header>
+    </el-header>
     <article>
       <router-view></router-view>
     </article>
@@ -31,7 +31,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
     border-bottom: 1px solid #d3dce6;
   }
 }
