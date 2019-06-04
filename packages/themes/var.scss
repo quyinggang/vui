@@ -1,21 +1,26 @@
-$white: #fff;
+$initial-bgcolor: #fff;
 $primary:  #409EFF;
-$primary-light-0: mix($white, $primary, 10%);
-$primary-light-1: mix($white, $primary, 20%);
-$primary-light-2: mix($white, $primary, 30%);
-$primary-light-3: mix($white, $primary, 40%);
-$primary-light-4: mix($white, $primary, 50%);
-$primary-light-5: mix($white, $primary, 60%);
-$primary-light-6: mix($white, $primary, 70%);
-$primary-light-7: mix($white, $primary, 80%);
-$primary-light-8: mix($white, $primary, 90%);
+$primary-light-0: mix($initial-bgcolor, $primary, 10%);
+$primary-light-1: mix($initial-bgcolor, $primary, 20%);
+$primary-light-2: mix($initial-bgcolor, $primary, 30%);
+$primary-light-3: mix($initial-bgcolor, $primary, 40%);
+$primary-light-4: mix($initial-bgcolor, $primary, 50%);
+$primary-light-5: mix($initial-bgcolor, $primary, 60%);
+$primary-light-6: mix($initial-bgcolor, $primary, 70%);
+$primary-light-7: mix($initial-bgcolor, $primary, 80%);
+$primary-light-8: mix($initial-bgcolor, $primary, 90%);
 $success: #67c23a;
-$success-light-0: mix($white, $success, 80%);
-$success-light-1: mix($white, $success, 90%);
+$success-light-1: mix($initial-bgcolor, $success, 20%);
 $info: #909399;
+$info-light-1: mix($initial-bgcolor, $info, 20%);
 $warning: #e6a23c;
+$warning-light-1: mix($initial-bgcolor, $warning, 20%);
 $danger: #f56c6c;
+$danger-light-1: mix($initial-bgcolor, $danger, 20%);
 $border: #dcdfe6;
+
+$disabled-color: #c0c4cc;
+$disabled-bdcolor: #ebeef5;
 
 $padding-tb: 12px;
 $padding-lr: 20px;

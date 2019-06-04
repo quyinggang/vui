@@ -5,6 +5,7 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Footer from '../packages/footer/index.js';
 import Layout from '../packages/layout/index.js';
+import Radio from '../packages/radio/index.js';
 
 const components = [
   Button,
@@ -13,7 +14,8 @@ const components = [
   Header,
   Aside,
   Footer,
-  Layout
+  Layout,
+  Radio
 ];
 
 function install(Vue) {
@@ -34,5 +36,6 @@ export default {
   Header,
   Aside,
   Footer,
-  Layout
+  Layout,
+  Radio
 };

@@ -6,6 +6,7 @@
       size ? 'el-button--' + size : '',
       round ? 'el-button--round' : '',
       circle ? 'el-button--circle' : '',
+      disabled ? 'el-button--disabled' : '',
       customClass
     ]"
     :disabled="disabled"

@@ -5,5 +5,6 @@
   "header": "./packages/header/index.js",
   "aside": "./packages/aside/index.js",
   "footer": "./packages/footer/index.js",
-  "layout": "./packages/layout/index.js"
+  "layout": "./packages/layout/index.js",
+  "radio": "./packages/radio/index.js"
 }
