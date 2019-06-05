@@ -1,6 +1,9 @@
 import Aside from '../packages/aside/index.js';
 import Button from '../packages/button/index.js';
 import ButtonGroup from '../packages/button-group/index.js';
+import CheckButton from '../packages/check-button/index.js';
+import CheckGroup from '../packages/check-group/index.js';
+import Checkbox from '../packages/checkbox/index.js';
 import Content from '../packages/content/index.js';
 import Footer from '../packages/footer/index.js';
 import Header from '../packages/header/index.js';
@@ -13,6 +16,9 @@ const components = [
   Aside,
   Button,
   ButtonGroup,
+  CheckButton,
+  CheckGroup,
+  Checkbox,
   Content,
   Footer,
   Header,
@@ -37,6 +43,9 @@ export default {
   Aside,
   Button,
   ButtonGroup,
+  CheckButton,
+  CheckGroup,
+  Checkbox,
   Content,
   Footer,
   Header,

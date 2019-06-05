@@ -17,7 +17,7 @@
         v-model="inputValue"
         :disabled="isDisabled"
         :value="label"
-        @change="handleChange"
+        @change.stop="handleChange"
       >
     </span>
     <span class="el-radio__label">
@@ -29,7 +29,11 @@
 <script>
 export default {
   name: 'ElRadio',
-  inject: ['ElRadioGroup'],
+  inject: {
+    elRadioGroup: {
+      default: null
+    }
+  },
   props: {
     value: [String, Number, Boolean],
     label: [String, Number, Boolean],
@@ -44,16 +48,16 @@ export default {
   },
   computed: {
     isDisabled() {
-      const parent = this.ElRadioGroup;
+      const parent = this.elRadioGroup;
       return (parent && parent.disabled) || this.disabled;
     },
     inputValue: {
       get() {
-        const parent = this.ElRadioGroup;
+        const parent = this.elRadioGroup;
         return parent ? parent.value : this.value;
       },
       set(value) {
-        const parent = this.ElRadioGroup;
+        const parent = this.elRadioGroup;
         parent ? parent.$emit('input', value) : this.$emit('input', value);
       }
     }
@@ -62,9 +66,10 @@ export default {
     handleChange() {
       // nextTick是保证input事件改变了value值，否则value就是上一个状态下的值
       this.$nextTick(() => {
-        const parent = this.ElRadioGroup;
+        const parent = this.elRadioGroup;
         const value = this.inputValue;
-        parent ? parent.$emit('change', value) : this.$emit('change', value);
+        parent && parent.$emit('radioChange', value);
+        this.$emit('change', value);
       });
     }
   }

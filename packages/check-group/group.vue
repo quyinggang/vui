@@ -1,26 +1,26 @@
 <template>
-  <div class="el-radio-group" :class="{'is-disabled': disabled}">
+  <div class="el-checkbox-group">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ElRadioGroup',
+  name: 'ElCheckboxGroup',
   provide() {
     return {
-      elRadioGroup: this
+      ElCheckboxGroup: this
     };
   },
   props: {
-    value: [String, Number, Boolean],
+    value: Array,
     disabled: {
       type: Boolean,
       default: false
     }
   },
   created() {
-    this.$on('radioGroup', this.handleChange);
+    this.$on('checkboxChange', this.handleChange);
   },
   methods: {
     handleChange(value) {

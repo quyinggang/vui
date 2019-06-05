@@ -1,14 +1,14 @@
 <template>
-  <el-radio class="el-radio-button" :label="label" :disabled="isDisabled">
+  <el-checkbox class="el-checkbox-button" :label="label" :disabled="isDisabled">
     <slot></slot>
-  </el-radio>
+  </el-checkbox>
 </template>
 
 <script>
 export default {
-  name: 'ElRadioButton',
+  name: 'ElCheckboxButton',
   inject: {
-    elRadioGroup: {
+    elCheckboxGroup: {
       default: null
     }
   },
@@ -21,8 +21,8 @@ export default {
   },
   computed: {
     isDisabled() {
-      const parent = this.elRadioGroup;
-      return (parent && parent.disabled) || this.disabled;
+      const parent = this.elCheckboxGroup;
+      return parent ? parent.disabled : this.disabled;
     }
   }
 };
