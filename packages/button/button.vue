@@ -1,13 +1,12 @@
 <template>
   <button
+    class="el-button"
     :class="[
-      'el-button',
       type ? 'el-button--' + type : '',
       size ? 'el-button--' + size : '',
-      round ? 'el-button--round' : '',
-      circle ? 'el-button--circle' : '',
-      disabled ? 'el-button--disabled' : '',
-      customClass
+      round ? 'is-round' : '',
+      circle ? 'is-circle' : '',
+      disabled ? 'is-disabled' : ''
     ]"
     :disabled="disabled"
     @click="handleBtnClick"
@@ -47,8 +46,7 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    },
-    customClass: String
+    }
   },
   methods: {
     handleBtnClick() {

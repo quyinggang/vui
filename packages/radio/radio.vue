@@ -1,9 +1,9 @@
 <template>
   <label
+    class="el-radio"
     :class="[
-      'el-radio',
       inputValue === label ? 'is-checked' : '',
-      disabled ? 'is-disabled' : '',
+      isDisabled ? 'is-disabled' : '',
       border ? 'is-border' : ''
     ]">
     <span
@@ -15,8 +15,9 @@
       <input
         type="radio"
         v-model="inputValue"
-        :disabled="disabled"
+        :disabled="isDisabled"
         :value="label"
+        @change="handleChange"
       >
     </span>
     <span class="el-radio__label">
@@ -28,6 +29,7 @@
 <script>
 export default {
   name: 'ElRadio',
+  inject: ['ElRadioGroup'],
   props: {
     value: [String, Number, Boolean],
     label: [String, Number, Boolean],
@@ -41,13 +43,29 @@ export default {
     }
   },
   computed: {
+    isDisabled() {
+      const parent = this.ElRadioGroup;
+      return (parent && parent.disabled) || this.disabled;
+    },
     inputValue: {
       get() {
-        return this.value;
+        const parent = this.ElRadioGroup;
+        return parent ? parent.value : this.value;
       },
       set(value) {
-        this.$emit('input', value);
+        const parent = this.ElRadioGroup;
+        parent ? parent.$emit('input', value) : this.$emit('input', value);
       }
+    }
+  },
+  methods: {
+    handleChange() {
+      // nextTick是保证input事件改变了value值，否则value就是上一个状态下的值
+      this.$nextTick(() => {
+        const parent = this.ElRadioGroup;
+        const value = this.inputValue;
+        parent ? parent.$emit('change', value) : this.$emit('change', value);
+      });
     }
   }
 };

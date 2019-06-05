@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-radio v-model="radio" :label="1">测试</el-radio>
+    <el-radio-group v-model="radio">
+      <el-radio-button :label="1">测试1</el-radio-button>
+      <el-radio-button :label="2" disabled>测试2</el-radio-button>
+    </el-radio-group>
   </div>
 </template>
 

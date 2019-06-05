@@ -6,5 +6,7 @@
   "footer": "./packages/footer/index.js",
   "header": "./packages/header/index.js",
   "layout": "./packages/layout/index.js",
-  "radio": "./packages/radio/index.js"
+  "radio": "./packages/radio/index.js",
+  "radio-button": "./packages/radio-button/index.js",
+  "radio-group": "./packages/radio-group/index.js"
 }

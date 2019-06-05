@@ -66,11 +66,11 @@ $radius: 4px;
   @include button-status($primary, transparent, transparent);
 }
 
-.el-button--round {
+.el-button.is-round {
   border-radius: 20px;
 }
 
-.el-button--circle {
+.el-button.is-circle {
   padding: $padding-tb;
   border-radius: 50%;
 }
