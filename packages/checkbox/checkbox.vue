@@ -13,6 +13,7 @@
       ]">
       <span class="ui-checkbox__inner"></span>
       <input
+        class="ui-checkbox--origin"
         v-if="!uiCheckboxGroup"
         type="checkbox"
         :disabled="isDisabled"
@@ -22,6 +23,7 @@
         @change.stop="handleChange"
       >
       <input
+        class="ui-checkbox--origin"
         v-else
         type="checkbox"
         :disabled="isDisabled"

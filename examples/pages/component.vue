@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="section--component">
+    <ui-textarea v-model="inputValue" placeholder="请填写内容"></ui-textarea>
   </div>
 </template>
 
@@ -7,9 +8,14 @@
 export default {
   data() {
     return {
-      radio: ['上海'],
-      checkbox: 1
+      inputValue: '测试'
     };
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.section--component {
+  padding: 20px;
+}
+</style>

@@ -8,7 +8,7 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  input[type="checkbox"] {
+  &--origin {
     position: absolute;
     top: 0;
     left: 0;

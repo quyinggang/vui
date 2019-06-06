@@ -13,6 +13,7 @@
       ]">
       <span class="ui-radio__inner"></span>
       <input
+        class="ui-radio--origin"
         type="radio"
         v-model="inputValue"
         :disabled="isDisabled"

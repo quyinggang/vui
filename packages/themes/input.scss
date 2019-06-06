@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.ui-input-container {
+  font-size: 14px;
+  .ui-input {
+    display: inline-block;
+    padding: 0 15px;
+    height: 40px;
+    border: 1px solid $border;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color .1s ease-in;
+    &--origin {
+      width: 100%;
+      height: 38px;
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+    }
+    .ui-input__inner::placeholder {
+      color: $disabled-color;
+    }
+  
+    &:hover {
+      border-color: $disabled-color;
+    }
+  }
+
+  .ui-input.is-focus {
+    border-color: $primary;
+  }
+
+  .ui-input.is-readonly {
+    &:hover {
+      border-color: $border;
+    }
+  }
+  .ui-input.is-disabled {
+    color: $disabled-color;
+    background-color: $disabled-bgcolor;
+    border-color: $disabled-bdcolor-1;
+    cursor: not-allowed;
+    .ui-input__inner {
+      background-color: $disabled-bgcolor;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.ui-input-container.is-compound {
+  display: flex;
+  .ui-input__prepend,
+  .ui-input__append {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    vertical-align: middle;
+    border: 1px solid $border;
+    box-sizing: border-box;
+  }
+  .ui-input.is-prepend {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .ui-input.is-append {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
