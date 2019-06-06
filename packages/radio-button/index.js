@@ -1,7 +1,7 @@
-import ElRadioButton from './button';
+import UiRadioButton from './button';
 
-ElRadioButton.install = function(Vue) {
-  Vue.component(ElRadioButton.name, ElRadioButton);
+UiRadioButton.install = function(Vue) {
+  Vue.component(UiRadioButton.name, UiRadioButton);
 };
 
-export default ElRadioButton;
+export default UiRadioButton;

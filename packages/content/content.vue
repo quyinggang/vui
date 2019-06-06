@@ -1,11 +1,11 @@
 <template>
-  <div class="el-content">
+  <div class="ui-content">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ElContent'
+  name: 'UiContent'
 };
 </script>

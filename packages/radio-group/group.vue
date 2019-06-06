@@ -1,15 +1,15 @@
 <template>
-  <div class="el-radio-group" :class="{'is-disabled': disabled}">
+  <div class="ui-radio-group" :class="{'is-disabled': disabled}">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ElRadioGroup',
+  name: 'UiRadioGroup',
   provide() {
     return {
-      elRadioGroup: this
+      uiRadioGroup: this
     };
   },
   props: {

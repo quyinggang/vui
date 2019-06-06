@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.el-radio {
+.ui-radio {
   display: inline-block;
   font-size: 14px;
   font-weight: 500;
@@ -51,41 +51,41 @@
   }
 }
 
-.el-radio:not(:nth-last-of-type(1)) {
+.ui-radio:not(:nth-last-of-type(1)) {
   margin-right: 30px;
 }
 
-.el-radio.is-checked {
-  .el-radio__inner {
+.ui-radio.is-checked {
+  .ui-radio__inner {
     background-color: $primary;
     border-color: $primary;
     &::after {
       transform: translate(-50%, -50%) scale(1);
     }
   }
-  .el-radio__label {
+  .ui-radio__label {
     color: $primary;
   }
 }
 
-.el-radio.is-disabled {
+.ui-radio.is-disabled {
   color: $disabled-color;
   cursor: not-allowed;
-  .el-radio__inner {
+  .ui-radio__inner {
     background-color: $initial-bgcolor;
     border-color: $disabled-bdcolor;
   }
   .is-checked {
-    .el-radio__inner::after {
+    .ui-radio__inner::after {
       background-color: $disabled-color;
     }
   }
-  .el-radio__label {
+  .ui-radio__label {
     color: $disabled-color;
   }
 }
 
-.el-radio.is-border {
+.ui-radio.is-border {
   height: 40px;
   line-height: 40px;
   padding: 0 $padding-lr;
@@ -93,15 +93,15 @@
   border: 1px solid $border;
 }
 
-.el-radio.is-checked.is-border {
+.ui-radio.is-checked.is-border {
   border-color: $primary;
 }
 
-.el-radio.is-disabled.is-border {
+.ui-radio.is-disabled.is-border {
   border-color: $disabled-bdcolor;
 }
 
-.el-radio-button {
+.ui-radio-button {
   height: 40px;
   line-height: 40px;
   padding: 0 $padding-lr;
@@ -109,31 +109,31 @@
   &:not(:nth-last-of-type(1)) {
     margin-right: 0;
   }
-  .el-radio__label:hover {
+  .ui-radio__label:hover {
     color: $primary;
   }
 
   &.is-checked {
     background-color: $primary;
     border-color: $primary;
-    .el-radio__label {
+    .ui-radio__label {
       color: $initial-bgcolor;
     }
   }
 
   &.is-disabled {
-    .el-radio__label:hover {
+    .ui-radio__label:hover {
       color: $disabled-color;
     }
   }
 }
 
-.el-radio-group {
+.ui-radio-group {
   display: flex;
-  .el-radio-button:not(:nth-last-of-type(1)) {
+  .ui-radio-button:not(:nth-last-of-type(1)) {
     border-right: none;
   }
-  .el-radio-button {
+  .ui-radio-button {
     &:first-child {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
@@ -142,7 +142,7 @@
       border-top-right-radius: 4px;
       border-bottom-right-radius: 4px;
     }
-    .el-radio__inner {
+    .ui-radio__inner {
       display: none;
     }
   }

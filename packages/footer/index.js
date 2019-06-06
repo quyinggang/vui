@@ -1,7 +1,7 @@
-import ElFooter from './footer';
+import UiFooter from './footer';
 
-ElFooter.install = function(Vue) {
-  Vue.component(ElFooter.name, ElFooter);
+UiFooter.install = function(Vue) {
+  Vue.component(UiFooter.name, UiFooter);
 };
 
-export default ElFooter;
+export default UiFooter;

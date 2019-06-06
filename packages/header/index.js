@@ -1,7 +1,7 @@
-import ElHeader from './header';
+import UiHeader from './header';
 
-ElHeader.install = function(Vue) {
-  Vue.component(ElHeader.name, ElHeader);
+UiHeader.install = function(Vue) {
+  Vue.component(UiHeader.name, UiHeader);
 };
 
-export default ElHeader;
+export default UiHeader;

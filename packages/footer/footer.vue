@@ -1,12 +1,12 @@
 <template>
-  <footer :class="['el-footer', 'is' + align]" :style="{height: height}">
+  <footer class="ui-footer" :class="['is-' + align]" :style="{height: height}">
     <slot></slot>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'ElFooter',
+  name: 'UiFooter',
   props: {
     height: {
       type: String,

@@ -1,15 +1,15 @@
 <template>
-  <div class="el-checkbox-group">
+  <div class="ui-checkbox-group">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ElCheckboxGroup',
+  name: 'UiCheckboxGroup',
   provide() {
     return {
-      ElCheckboxGroup: this
+      uiCheckboxGroup: this
     };
   },
   props: {
@@ -20,7 +20,7 @@ export default {
     }
   },
   created() {
-    this.$on('checkboxChange', this.handleChange);
+    this.$on('checkboxValueChange', this.handleChange);
   },
   methods: {
     handleChange(value) {

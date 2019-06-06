@@ -1,12 +1,12 @@
 <template>
-  <header :class="['el-header', 'is-' + align]" :style="{height: height}">
+  <header class="ui-header" :class="['is-' + align]" :style="{height: height}">
     <slot></slot>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'ElHeader',
+  name: 'UiHeader',
   props: {
     height: {
       type: String,

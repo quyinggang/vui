@@ -1,7 +1,7 @@
-import ElRadioGroup from './group';
+import UiRadioGroup from './group';
 
-ElRadioGroup.install = function(Vue) {
-  Vue.component(ElRadioGroup.name, ElRadioGroup);
+UiRadioGroup.install = function(Vue) {
+  Vue.component(UiRadioGroup.name, UiRadioGroup);
 };
 
-export default ElRadioGroup;
+export default UiRadioGroup;

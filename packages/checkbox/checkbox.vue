@@ -1,6 +1,6 @@
 <template>
   <label
-    class="el-checkbox"
+    class="ui-checkbox"
     :class="[
       isChecked ? 'is-checked' : '',
       isDisabled ? 'is-disabled' : '',
@@ -8,12 +8,12 @@
     ]">
     <span
       :class="[
-        'el-checkbox__input',
+        'ui-checkbox__input',
         isChecked ? 'is-checked' : ''
       ]">
-      <span class="el-checkbox__inner"></span>
+      <span class="ui-checkbox__inner"></span>
       <input
-        v-if="!ElCheckboxGroup"
+        v-if="!uiCheckboxGroup"
         type="checkbox"
         :disabled="isDisabled"
         :true-value="trueLabel"
@@ -30,7 +30,7 @@
         @change.stop="handleChange"
       >
     </span>
-    <span class="el-checkbox__label">
+    <span class="ui-checkbox__label">
       <slot></slot>
     </span>
   </label>
@@ -38,9 +38,9 @@
 
 <script>
 export default {
-  name: 'ElCheckbox',
+  name: 'UiCheckbox',
   inject: {
-    ElCheckboxGroup: {
+    uiCheckboxGroup: {
       default: null
     }
   },
@@ -60,9 +60,10 @@ export default {
   },
   computed: {
     isChecked() {
-      const parent = this.ElCheckboxGroup;
+      const parent = this.uiCheckboxGroup;
       const trueLabel = this.trueLabel;
       const value = this.inputValue;
+      // label属性只会在group存在时有效
       return parent
         ? Array.isArray(parent.value)
           ? parent.value.includes(this.label)
@@ -72,17 +73,17 @@ export default {
           : typeof value === 'boolean' && value;
     },
     isDisabled() {
-      const parent = this.ElCheckboxGroup;
+      const parent = this.uiCheckboxGroup;
       return (parent && parent.disabled) || this.disabled;
     },
     inputValue: {
       get() {
-        const parent = this.ElCheckboxGroup;
+        const parent = this.uiCheckboxGroup;
         // 利用checkbox v-model为数组时，会自动去除数组中对应的checkbox value值
         return parent ? parent.value : this.value;
       },
       set(value) {
-        const parent = this.ElCheckboxGroup;
+        const parent = this.uiCheckboxGroup;
         parent ? parent.$emit('input', value) : this.$emit('input', value);
       }
     }
@@ -90,9 +91,9 @@ export default {
   methods: {
     handleChange() {
       this.$nextTick(() => {
-        const parent = this.ElCheckboxGroup;
+        const parent = this.uiCheckboxGroup;
         const value = this.inputValue;
-        parent && parent.$emit('checkboxChange', value);
+        parent && parent.$emit('checkboxValueChange', value);
         this.$emit('change', value);
       });
     }

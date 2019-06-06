@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.el-layout {
+.ui-layout {
   display: flex;
   &.is-vertical {
     flex-direction: column;
@@ -10,8 +10,8 @@
   }
 }
 
-.el-header,
-.el-footer {
+.ui-header,
+.ui-footer {
   padding: 0 $padding-lr;
   line-height: 1;
   &.is-center {
@@ -25,10 +25,10 @@
   }
 }
 
-.el-aside {
+.ui-aside {
   padding: $padding-tb 0;
 }
 
-.el-content {
+.ui-content {
   padding: $padding-tb $padding-lr;
 }

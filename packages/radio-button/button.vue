@@ -1,14 +1,14 @@
 <template>
-  <el-radio class="el-radio-button" :label="label" :disabled="isDisabled">
+  <ui-radio class="ui-radio-button" :label="label" :disabled="isDisabled">
     <slot></slot>
-  </el-radio>
+  </ui-radio>
 </template>
 
 <script>
 export default {
-  name: 'ElRadioButton',
+  name: 'UiRadioButton',
   inject: {
-    elRadioGroup: {
+    uiRadioGroup: {
       default: null
     }
   },
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isDisabled() {
-      const parent = this.elRadioGroup;
+      const parent = this.uiRadioGroup;
       return (parent && parent.disabled) || this.disabled;
     }
   }

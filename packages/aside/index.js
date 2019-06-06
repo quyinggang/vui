@@ -1,7 +1,7 @@
-import ElAside from './aside';
+import UiAside from './aside';
 
-ElAside.install = function(Vue) {
-  Vue.component(ElAside.name, ElAside);
+UiAside.install = function(Vue) {
+  Vue.component(UiAside.name, UiAside);
 };
 
-export default ElAside;
+export default UiAside;

@@ -1,12 +1,12 @@
 <template>
-  <aside class="el-aside" :style="{width: width}">
+  <aside class="ui-aside" :style="{width: width}">
     <slot></slot>
   </aside>
 </template>
 
 <script>
 export default {
-  name: 'ElAside',
+  name: 'UiAside',
   props: {
     width: {
       type: String,

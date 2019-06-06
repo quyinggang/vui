@@ -1,7 +1,7 @@
-import ElButton from './button';
+import UiButton from './button';
 
-ElButton.install = function(Vue) {
-  Vue.component(ElButton.name, ElButton);
+UiButton.install = function(Vue) {
+  Vue.component(UiButton.name, UiButton);
 };
 
-export default ElButton;
+export default UiButton;

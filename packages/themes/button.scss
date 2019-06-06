@@ -13,7 +13,7 @@
 }
 $radius: 4px;
 
-.el-button {
+.ui-button {
   display: inline-block;
   margin: 0;
   padding: $padding-tb $padding-lr;
@@ -40,49 +40,48 @@ $radius: 4px;
   }
 }
 
-.el-button--primary {
+.ui-button--primary {
   @include button-status($initial-bgcolor, $primary, $primary-light-1);
 }
 
-.el-button--success {
+.ui-button--success {
   @include button-status($initial-bgcolor, $success, $success-light-1);
 }
 
-.el-button--info {
+.ui-button--info {
   @include button-status($initial-bgcolor, $info, $info-light-1);
 }
 
-.el-button--warning {
+.ui-button--warning {
   @include button-status($initial-bgcolor, $warning, $warning-light-1);
 }
 
-.el-button--danger {
+.ui-button--danger {
   @include button-status($initial-bgcolor, $danger, $danger-light-1);
 }
 
-.el-button--text {
+.ui-button--text {
   padding-left: 0;
   padding-right: 0;
   @include button-status($primary, transparent, transparent);
 }
 
-.el-button.is-round {
+.ui-button.is-round {
   border-radius: 20px;
 }
 
-.el-button.is-circle {
+.ui-button.is-circle {
   padding: $padding-tb;
   border-radius: 50%;
 }
 
-.el-button-group {
+.ui-button-group {
   display: flex;
-  .el-button {
+  .ui-button {
     border-radius: 0;
     &:first-child {
       border-top-left-radius: $radius;
       border-bottom-left-radius: $radius;
-      border-right: none;
     }
     &:last-child {
       border-top-right-radius: $radius;
@@ -92,7 +91,7 @@ $radius: 4px;
   }
 }
 
-.el-button--disabled {
+.ui-button--disabled {
   color: $disabled-color;
   background-color: $initial-bgcolor;
   border-color: $disabled-bdcolor;

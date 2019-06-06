@@ -1,7 +1,7 @@
-import ElContent from './content';
+import UiContent from './content';
 
-ElContent.install = function(Vue) {
-  Vue.component(ElContent.name, ElContent);
+UiContent.install = function(Vue) {
+  Vue.component(UiContent.name, UiContent);
 };
 
-export default ElContent;
+export default UiContent;

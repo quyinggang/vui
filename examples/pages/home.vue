@@ -1,14 +1,14 @@
 <template>
   <main class="main">
-    <el-header class="header">
+    <ui-header class="header">
       <div class="nav--left">
         <img />
         VUI
       </div>
       <div class="nav--right">
-        <el-button type="text" @click="handleRouteJump">组件</el-button>
+        <ui-button type="text" @click="handleRouteJump">组件</ui-button>
       </div>
-    </el-header>
+    </ui-header>
     <article>
       <router-view></router-view>
     </article>

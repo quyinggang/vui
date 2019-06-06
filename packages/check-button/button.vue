@@ -1,14 +1,14 @@
 <template>
-  <el-checkbox class="el-checkbox-button" :label="label" :disabled="isDisabled">
+  <ui-checkbox class="ui-checkbox-button" :label="label" :disabled="isDisabled">
     <slot></slot>
-  </el-checkbox>
+  </ui-checkbox>
 </template>
 
 <script>
 export default {
-  name: 'ElCheckboxButton',
+  name: 'UiCheckboxButton',
   inject: {
-    elCheckboxGroup: {
+    uiCheckboxGroup: {
       default: null
     }
   },
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isDisabled() {
-      const parent = this.elCheckboxGroup;
+      const parent = this.uiCheckboxGroup;
       return parent ? parent.disabled : this.disabled;
     }
   }

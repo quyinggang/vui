@@ -1,14 +1,14 @@
 <template>
   <button
-    class="el-button"
+    class="ui-button"
     :class="[
-      type ? 'el-button--' + type : '',
-      size ? 'el-button--' + size : '',
+      type ? 'ui-button--' + type : '',
+      size ? 'ui-button--' + size : '',
       round ? 'is-round' : '',
       circle ? 'is-circle' : '',
-      disabled ? 'is-disabled' : ''
+      isDisabled ? 'is-disabled' : ''
     ]"
-    :disabled="disabled"
+    :disabled="isDisabled"
     @click="handleBtnClick"
   >
     <slot></slot>
@@ -17,7 +17,12 @@
 
 <script>
 export default {
-  name: 'ElButton',
+  name: 'UiButton',
+  inject: {
+    uiButtonGroup: {
+      default: null
+    }
+  },
   props: {
     size: {
       type: String,
@@ -46,6 +51,12 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    isDisabled() {
+      const parent = this.uiButtonGroup;
+      return (parent && parent.disabled) || this.disabled;
     }
   },
   methods: {

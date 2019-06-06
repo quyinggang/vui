@@ -1,7 +1,7 @@
-import ElLayout from './layout';
+import UiLayout from './layout';
 
-ElLayout.install = function(Vue) {
-  Vue.component(ElLayout.name, ElLayout);
+UiLayout.install = function(Vue) {
+  Vue.component(UiLayout.name, UiLayout);
 };
 
-export default ElLayout;
+export default UiLayout;

@@ -1,7 +1,7 @@
-import ElButtonGroup from './group';
+import UiButtonGroup from './group';
 
-ElButtonGroup.install = function(Vue) {
-  Vue.component(ElButtonGroup.name, ElButtonGroup);
+UiButtonGroup.install = function(Vue) {
+  Vue.component(UiButtonGroup.name, UiButtonGroup);
 };
 
-export default ElButtonGroup;
+export default UiButtonGroup;

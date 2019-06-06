@@ -1,7 +1,7 @@
-import ElRadio from './radio';
+import UiRadio from './radio';
 
-ElRadio.install = function(Vue) {
-  Vue.component(ElRadio.name, ElRadio);
+UiRadio.install = function(Vue) {
+  Vue.component(UiRadio.name, UiRadio);
 };
 
-export default ElRadio;
+export default UiRadio;

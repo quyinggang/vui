@@ -1,12 +1,12 @@
 <template>
-  <div :class="['el-layout', 'is-' + direction]">
+  <div class="ui-layout" :class="['is-' + direction]">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ElLayout',
+  name: 'UiLayout',
   props: {
     direction: {
       type: String,
