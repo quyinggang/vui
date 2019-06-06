@@ -5,13 +5,13 @@
     </div>
     <div
       class="ui-input"
-      :class="[
-        focus ? 'is-focus' : '',
-        readonly ? 'is-readonly' : '',
-        disabled ? 'is-disabled': '',
-        $slots.prepend ? 'is-prepend' : '',
-        $slots.append ? 'is-append' : ''
-      ]"
+      :class="{
+        'is-focus': isFocus,
+        'is-readonly': readonly,
+        'is-disabled': disabled,
+        'is-prepend' : $slots.prepend,
+        'is-append': $slots.append
+      }"
     >
       <span class="icon--prefix">
         <i :class="prefixIcon"></i>
@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      focus: false
+      isFocus: false
     };
   },
   computed: {
@@ -88,11 +88,11 @@ export default {
   },
   methods: {
     handleFocus(e) {
-      this.focus = true;
+      this.isFocus = true;
       this.$emit('focus', e);
     },
     handleBlur(e) {
-      this.focus = false;
+      this.isFocus = false;
       this.$emit('blur', e);
     },
     handleChange(value) {

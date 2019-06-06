@@ -1,16 +1,13 @@
 <template>
   <label
     class="ui-checkbox"
-    :class="[
-      isChecked ? 'is-checked' : '',
-      isDisabled ? 'is-disabled' : '',
-      border ? 'is-border' : ''
-    ]">
-    <span
-      :class="[
-        'ui-checkbox__input',
-        isChecked ? 'is-checked' : ''
-      ]">
+    :class="{
+      'is-checked': isChecked,
+      'is-disabled': isDisabled,
+      'is-border': border
+    }"
+  >
+    <span :class="['ui-checkbox__input',{ 'is-checked': isChecked }]">
       <span class="ui-checkbox__inner"></span>
       <input
         class="ui-checkbox--origin"

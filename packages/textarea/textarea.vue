@@ -2,9 +2,9 @@
   <div
     class="ui-textarea"
     :class="[
-      focus ? 'is-focus' : '',
-      readonly ? 'is-readonly' : '',
-      disabled ? 'is-disabled': '',
+      { 'is-focus': isFocus },
+      { 'is-readonly': readonly },
+      { 'is-disabled': disabled },
       'is-' + getResize
     ]"
   >
@@ -54,7 +54,7 @@ export default {
   },
   data() {
     return {
-      focus: false
+      isFocus: false
     };
   },
   computed: {
@@ -87,11 +87,11 @@ export default {
   },
   methods: {
     handleFocus() {
-      this.focus = true;
+      this.isFocus = true;
       this.$emit('focus');
     },
     handleBlur(e) {
-      this.focus = false;
+      this.isFocus = false;
       this.$emit('blur', e.target.value);
     },
     handleChange(value) {

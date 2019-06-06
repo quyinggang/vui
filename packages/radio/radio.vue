@@ -1,16 +1,13 @@
 <template>
   <label
     class="ui-radio"
-    :class="[
-      inputValue === label ? 'is-checked' : '',
-      isDisabled ? 'is-disabled' : '',
-      border ? 'is-border' : ''
-    ]">
-    <span
-      :class="[
-        'ui-radio__input',
-        inputValue === label ? 'is-checked' : ''
-      ]">
+    :class="{
+      'is-checked': inputValue === label,
+      'is-disabled': isDisabled,
+      'is-border': border
+    }"
+  >
+    <span class="ui-radio__input" :class="{ 'is-checked': inputValue === label }">
       <span class="ui-radio__inner"></span>
       <input
         class="ui-radio--origin"
