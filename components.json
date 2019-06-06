@@ -13,5 +13,6 @@
   "radio": "./packages/radio/index.js",
   "radio-button": "./packages/radio-button/index.js",
   "radio-group": "./packages/radio-group/index.js",
+  "tag": "./packages/tag/index.js",
   "textarea": "./packages/textarea/index.js"
 }

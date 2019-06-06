@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+@mixin tag-status($color, $bgcolor, $bdcolor) {
+  color: $color;
+  border-color: $bdcolor;
+  background-color: $bgcolor;
+  .icon--close:hover {
+    color: #fff;
+    background-color: $color;
+  }
+}
+.ui-tag {
+  display: inline-block;
+  font-size: 14px;
+  padding: $padding-tb-1 $padding-lr-1;
+  border: 1px solid $border;
+  border-radius: 4px;
+  .icon--close {
+    display: inline-block;
+    position: relative;
+    right: -5px;
+    color: $primary;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    margin-left: 5px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: background-color .1s ease-in, color .1s ease-in;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+      background-color: $border;
+    }
+  }
+}
+
+.ui-tag.is-default {
+  @include tag-status($primary, $primary-light-8, $primary-light-7);
+}
+
+.ui-tag.is-info {
+  @include tag-status($info, $info-light-8, $info-light-7);
+}
+
+.ui-tag.is-success {
+  @include tag-status($success, $success-light-8, $success-light-7);
+}
+
+.ui-tag.is-warning {
+  @include tag-status($warning, $warning-light-8, $warning-light-7);
+}
+
+.ui-tag.is-danger {
+  @include tag-status($danger, $danger-light-8, $danger-light-7);
+}

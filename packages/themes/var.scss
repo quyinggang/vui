@@ -11,12 +11,20 @@ $primary-light-7: mix($initial-bgcolor, $primary, 80%);
 $primary-light-8: mix($initial-bgcolor, $primary, 90%);
 $success: #67c23a;
 $success-light-1: mix($initial-bgcolor, $success, 20%);
+$success-light-7: mix($initial-bgcolor, $success, 80%);
+$success-light-8: mix($initial-bgcolor, $success, 90%);
 $info: #909399;
 $info-light-1: mix($initial-bgcolor, $info, 20%);
+$info-light-7: mix($initial-bgcolor, $info, 80%);
+$info-light-8: mix($initial-bgcolor, $info, 90%);
 $warning: #e6a23c;
 $warning-light-1: mix($initial-bgcolor, $warning, 20%);
+$warning-light-7: mix($initial-bgcolor, $warning, 80%);
+$warning-light-8: mix($initial-bgcolor, $warning, 90%);
 $danger: #f56c6c;
 $danger-light-1: mix($initial-bgcolor, $danger, 20%);
+$danger-light-7: mix($initial-bgcolor, $danger, 80%);
+$danger-light-8: mix($initial-bgcolor, $danger, 90%);
 $border: #dcdfe6;
 
 $disabled-color: #c0c4cc;
@@ -25,4 +33,6 @@ $disabled-bdcolor-1: #e4e7ed;
 $disabled-bgcolor: #f5f7fa;
 
 $padding-tb: 12px;
+$padding-tb-1: 6px;
 $padding-lr: 20px;
+$padding-lr-1: 15px;

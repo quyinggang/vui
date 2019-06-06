@@ -4,9 +4,9 @@
     :class="[
       type ? 'ui-button--' + type : '',
       size ? 'ui-button--' + size : '',
-      round ? 'is-round' : '',
-      circle ? 'is-circle' : '',
-      isDisabled ? 'is-disabled' : ''
+      { 'is-round': round },
+      { 'is-circle': circle },
+      { 'is-disabled': isDisabled }
     ]"
     :disabled="isDisabled"
     @click="handleBtnClick"

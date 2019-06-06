@@ -12,6 +12,7 @@ import Layout from '../packages/layout/index.js';
 import Radio from '../packages/radio/index.js';
 import RadioButton from '../packages/radio-button/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
+import Tag from '../packages/tag/index.js';
 import Textarea from '../packages/textarea/index.js';
 
 const components = [
@@ -29,6 +30,7 @@ const components = [
   Radio,
   RadioButton,
   RadioGroup,
+  Tag,
   Textarea
 ];
 
@@ -58,5 +60,6 @@ export default {
   Radio,
   RadioButton,
   RadioGroup,
+  Tag,
   Textarea
 };

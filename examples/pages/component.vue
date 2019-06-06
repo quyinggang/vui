@@ -1,6 +1,6 @@
 <template>
   <div class="section--component">
-    <ui-textarea v-model="inputValue" placeholder="请填写内容"></ui-textarea>
+    <ui-tag closeable>text</ui-tag>
   </div>
 </template>
 
