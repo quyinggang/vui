@@ -9,6 +9,7 @@ import Footer from '../packages/footer/index.js';
 import Header from '../packages/header/index.js';
 import Input from '../packages/input/index.js';
 import Layout from '../packages/layout/index.js';
+import Progress from '../packages/progress/index.js';
 import Radio from '../packages/radio/index.js';
 import RadioButton from '../packages/radio-button/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
@@ -27,6 +28,7 @@ const components = [
   Header,
   Input,
   Layout,
+  Progress,
   Radio,
   RadioButton,
   RadioGroup,
@@ -57,6 +59,7 @@ export default {
   Header,
   Input,
   Layout,
+  Progress,
   Radio,
   RadioButton,
   RadioGroup,

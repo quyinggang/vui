@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.ui-progress.is-line {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+  &-bar {
+    position: relative;
+    width: inherit;
+    height: 6px;
+    border-radius: 4px;
+    background-color: $initial-bgcolor-1;
+    overflow: hidden;
+  }
+  &__inner {
+    width: 0;
+    height: inherit;
+    border-radius: inherit;
+    background-color: $primary;
+    .ui-progress__text {
+      float: right;
+      color: #fff;
+    }
+  }
+  > .ui-progress__text {
+    padding-left: 8px;
+  }
+}
+
+.ui-progress.is-circle {
+  width: 100px;
+  height: 100px;
+}

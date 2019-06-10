@@ -10,6 +10,7 @@
   "header": "./packages/header/index.js",
   "input": "./packages/input/index.js",
   "layout": "./packages/layout/index.js",
+  "progress": "./packages/progress/index.js",
   "radio": "./packages/radio/index.js",
   "radio-button": "./packages/radio-button/index.js",
   "radio-group": "./packages/radio-group/index.js",

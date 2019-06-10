@@ -1,8 +1,6 @@
 <template>
   <div class="section--component">
-    <ui-tag v-for="(item, i) in tags" :key="i" closeable @close="handleClose(i)">
-      {{ item }}
-    </ui-tag>
+    <ui-progress :percentage="10" type="circle"></ui-progress>
   </div>
 </template>
 
