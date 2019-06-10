@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.fade-out-leave-active {
+  transition: opacity .3s;
+}
+
+.fade-out-leave-to {
+  opacity: 0;
+}

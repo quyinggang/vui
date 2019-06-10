@@ -36,6 +36,10 @@
   }
 }
 
+.ui-tag + .ui-tag {
+  margin-left: 10px;
+}
+
 .ui-tag.is-default {
   @include tag-status($primary, $primary-light-8, $primary-light-7);
 }

@@ -1,16 +1,18 @@
 <template>
-  <span
-    class="ui-tag"
-    :class="[
-      'is-' + type,
-      { 'is-closeable': closeable }
-    ]"
-  >
-    <slot></slot>
-    <span v-show="closeable" class="icon--close" @click="handleClose">
-      x
+  <transition name="fade-out">
+    <span
+      class="ui-tag"
+      :class="[
+        'is-' + type,
+        { 'is-closeable': closeable }
+      ]"
+    >
+      <slot></slot>
+      <span v-show="closeable" class="icon--close" @click="handleClose">
+        x
+      </span>
     </span>
-  </span>
+  </transition>
 </template>
 
 <script>

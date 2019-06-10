@@ -3,10 +3,10 @@
     <h1 class="h1">VUI</h1>
     <p>个人级别的基于Vue 2.0的UI库，主要用于学习构建相关知识点。</p>
     <section class="action">
-      <el-button>开始使用</el-button>
-      <el-button @click="handleRouteChange">
+      <ui-button>开始使用</ui-button>
+      <ui-button @click="handleRouteChange">
         Github
-      </el-button>
+      </ui-button>
     </section>
   </div>
 </template>
