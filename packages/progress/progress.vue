@@ -1,18 +1,36 @@
 <template>
   <div class="ui-progress" :class="['is-' + type]">
-    <div v-show="type === 'line'" class="ui-progress-bar" :style="{height: width + 'px'}">
-      <div
-        class="ui-progress__inner"
-        :style="{backgroundcolor: color, width: percentage + '%'}"
-      >
-        <span class="ui-progress__text" v-show="showText && textInside">
-          {{ percentage }}%
+    <div class="ui-progress-bar" :style="{width: width + 'px',height: width + 'px'}">
+      <div v-show="type === 'line'" class="ui-progress__container">
+        <div
+          class="ui-progress__inner"
+          :style="{backgroundcolor: color, width: getPercentage + '%'}"
+        >
+          <span class="ui-progress__text" v-show="showText && textInside">
+            {{ getPercentage }}%
+          </span>
+        </div>
+        <span class="ui-progress__text" v-show="showText && !textInside">
+          {{ getPercentage }}%
         </span>
       </div>
+      <div class="ui-progress__container">
+        <svg class="ui-progress-svg" viewBox="0 0 100 100">
+          <path :d="getPathData" stroke="#ebeef5" :stroke-width="getStrokeWidth" fill="none"></path>
+          <path
+            class="circle"
+            :d="getPathData"
+            :stroke="color"
+            :stroke-width="getStrokeWidth"
+            fill="none"
+            stroke-linecap="round"
+            :style="getPathStyle"
+          >
+          </path>
+        </svg>
+        <span class="ui-progress__text">{{ getPercentage }}%</span>
+      </div>
     </div>
-    <span class="ui-progress__text" v-show="showText && !textInside">
-      {{ percentage }}%
-    </span>
   </div>
 </template>
 
@@ -53,6 +71,34 @@ export default {
     width: {
       type: Number,
       default: 126
+    }
+  },
+  computed: {
+    getPercentage() {
+      return Math.max(0, Math.min(this.percentage, 100));
+    },
+    getStrokeWidth() {
+      // 通过实际圆弧边框宽度在总宽度的占比来计算出相对宽度
+      return (this.strokeWidth / this.width * 100).toFixed(1);
+    },
+    getRadius() {
+      // svg初始视口半径是50，因为viewBox属性的缘故，整个svg随着外部容器宽高宽高变化而等比变化
+      // 所以这里只需要计算出最初的半径即可
+      return parseInt(50 - this.getStrokeWidth / 2, 10);
+    },
+    getPathData() {
+      const radius = this.getRadius;
+      // 绘制圆弧，注意相对坐标和绝对坐标的区别
+      return `M 50 50 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2} a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
+    },
+    getPathStyle() {
+      // 圆周长
+      const premitter = 2 * Math.PI * this.getRadius;
+      const offset = (1 - this.getPercentage / 100) * premitter;
+      return {
+        strokeDasharray: `${premitter}px,${premitter}px`,
+        strokeDashoffset: `${offset}px`
+      };
     }
   }
 };

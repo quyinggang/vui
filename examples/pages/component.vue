@@ -1,6 +1,7 @@
 <template>
   <div class="section--component">
-    <ui-progress :percentage="10" type="circle"></ui-progress>
+    <ui-progress :percentage="percentage" type="circle"></ui-progress>
+    <ui-button @click="handleAdd">+</ui-button>
   </div>
 </template>
 
@@ -9,12 +10,13 @@ export default {
   data() {
     return {
       inputValue: '测试',
-      tags: ['测试1', '测试2']
+      tags: ['测试1', '测试2'],
+      percentage: 10
     };
   },
   methods: {
-    handleClose(i) {
-      this.tags.splice(i, 1);
+    handleAdd() {
+      this.percentage += 10;
     }
   }
 };
