@@ -1,6 +1,6 @@
 <template>
   <div class="section--component">
-    <ui-progress :percentage="percentage" type="circle"></ui-progress>
+    <ui-progress :percentage="percentage" type="circle" :width="300"></ui-progress>
     <ui-button @click="handleAdd">+</ui-button>
   </div>
 </template>

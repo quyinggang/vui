@@ -79,11 +79,11 @@ export default {
     },
     getStrokeWidth() {
       // 通过实际圆弧边框宽度在总宽度的占比来计算出相对宽度
+      // 相对宽度作为实际宽度
       return (this.strokeWidth / this.width * 100).toFixed(1);
     },
     getRadius() {
-      // svg初始视口半径是50，因为viewBox属性的缘故，整个svg随着外部容器宽高宽高变化而等比变化
-      // 所以这里只需要计算出最初的半径即可
+      // 计算出当前半径（50是初始半径），以后等比呈现时都依此来处理
       return parseInt(50 - this.getStrokeWidth / 2, 10);
     },
     getPathData() {
