@@ -14,7 +14,7 @@
           {{ getPercentage }}%
         </span>
       </div>
-      <div class="ui-progress__container">
+      <div v-show="type === 'circle'" class="ui-progress__container">
         <svg class="ui-progress-svg" viewBox="0 0 100 100">
           <path :d="getPathData" stroke="#ebeef5" :stroke-width="getStrokeWidth" fill="none"></path>
           <path
@@ -49,7 +49,7 @@ export default {
       type: String,
       default: 'line',
       validator: value => {
-        return ['line', 'circle', 'dashboard'].includes(value);
+        return ['line', 'circle'].includes(value);
       }
     },
     showText: {
@@ -94,6 +94,7 @@ export default {
     getPathStyle() {
       // 圆周长
       const premitter = 2 * Math.PI * this.getRadius;
+      // 计算进度占比对应的偏移长度
       const offset = (1 - this.getPercentage / 100) * premitter;
       return {
         strokeDasharray: `${premitter}px,${premitter}px`,
