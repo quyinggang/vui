@@ -9,7 +9,7 @@
     >
       <slot></slot>
       <span v-show="closeable" class="icon--close" @click="handleClose">
-        x
+        <i class="i-close"></i>
       </span>
     </span>
   </transition>

@@ -11,6 +11,7 @@
     :disabled="isDisabled"
     @click="handleBtnClick"
   >
+    <i :class="icon"></i>
     <slot></slot>
   </button>
 </template>
@@ -51,7 +52,8 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    }
+    },
+    icon: String
   },
   computed: {
     isDisabled() {

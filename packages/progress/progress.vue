@@ -10,8 +10,9 @@
             {{ getPercentage }}%
           </span>
         </div>
-        <span class="ui-progress__text" v-show="showText && !textInside">
-          {{ getPercentage }}%
+        <span class="ui-progress__text" v-show="!textInside">
+          <span v-show="showText">{{ getPercentage }}%</span>
+          <i v-show="!showText" class="i-check"></i>
         </span>
       </div>
       <div v-show="type === 'circle'" class="ui-progress__container">
@@ -28,7 +29,10 @@
           >
           </path>
         </svg>
-        <span class="ui-progress__text">{{ getPercentage }}%</span>
+        <span class="ui-progress__text">
+          <span v-show="showText">{{ getPercentage }}%</span>
+          <i v-show="!showText" class="i-check"></i>
+        </span>
       </div>
     </div>
   </div>
