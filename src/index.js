@@ -13,6 +13,7 @@ import Progress from '../packages/progress/index.js';
 import Radio from '../packages/radio/index.js';
 import RadioButton from '../packages/radio-button/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
+import Switch from '../packages/switch/index.js';
 import Tag from '../packages/tag/index.js';
 import Textarea from '../packages/textarea/index.js';
 
@@ -32,6 +33,7 @@ const components = [
   Radio,
   RadioButton,
   RadioGroup,
+  Switch,
   Tag,
   Textarea
 ];
@@ -63,6 +65,7 @@ export default {
   Radio,
   RadioButton,
   RadioGroup,
+  Switch,
   Tag,
   Textarea
 };

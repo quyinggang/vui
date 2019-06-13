@@ -1,8 +1,14 @@
 <template>
   <div class="section--component">
-    <ui-progress direction="horizontal" :percentage="percentage"></ui-progress>
-    <ui-button @click="handleAdd">+</ui-button>
-    <ui-tag closeable>测试</ui-tag>
+    <ui-switch
+      v-model="switchValue"
+      active-text="成功"
+      inactive-text="失败"
+      active-color="red"
+      inactive-color="black"
+      @change="handleChange"
+    >
+    </ui-switch>
   </div>
 </template>
 
@@ -10,14 +16,15 @@
 export default {
   data() {
     return {
+      switchValue: true,
       inputValue: '测试',
       tags: ['测试1', '测试2'],
       percentage: 10
     };
   },
   methods: {
-    handleAdd() {
-      this.percentage += 10;
+    handleChange(value) {
+      console.log(value);
     }
   }
 };
