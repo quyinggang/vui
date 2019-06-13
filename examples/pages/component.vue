@@ -1,6 +1,6 @@
 <template>
   <div class="section--component">
-    <ui-progress :show-text="false" :percentage="percentage" type="circle"></ui-progress>
+    <ui-progress direction="horizontal" :percentage="percentage"></ui-progress>
     <ui-button @click="handleAdd">+</ui-button>
     <ui-tag closeable>测试</ui-tag>
   </div>

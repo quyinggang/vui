@@ -1,7 +1,7 @@
 <template>
   <div class="ui-progress" :class="['is-' + type]">
-    <div class="ui-progress-bar" :style="{width: width + 'px',height: width + 'px'}">
-      <div v-show="type === 'line'" class="ui-progress__container">
+    <div v-show="type === 'line'" class="ui-progress__container">
+      <div class="ui-progress-bar">
         <div
           class="ui-progress__inner"
           :style="{backgroundcolor: color, width: getPercentage + '%'}"
@@ -10,30 +10,34 @@
             {{ getPercentage }}%
           </span>
         </div>
-        <span class="ui-progress__text" v-show="!textInside">
-          <span v-show="showText">{{ getPercentage }}%</span>
-          <i v-show="!showText" class="i-check"></i>
-        </span>
       </div>
-      <div v-show="type === 'circle'" class="ui-progress__container">
-        <svg class="ui-progress-svg" viewBox="0 0 100 100">
-          <path :d="getPathData" stroke="#ebeef5" :stroke-width="getStrokeWidth" fill="none"></path>
-          <path
-            class="circle"
-            :d="getPathData"
-            :stroke="color"
-            :stroke-width="getStrokeWidth"
-            fill="none"
-            stroke-linecap="round"
-            :style="getPathStyle"
-          >
-          </path>
-        </svg>
-        <span class="ui-progress__text">
-          <span v-show="showText">{{ getPercentage }}%</span>
-          <i v-show="!showText" class="i-check"></i>
-        </span>
-      </div>
+      <span class="ui-progress__text" v-show="!textInside">
+        <span v-show="showText">{{ getPercentage }}%</span>
+        <i v-show="!showText" class="i-check"></i>
+      </span>
+    </div>
+    <div
+      v-show="type === 'circle'"
+      class="ui-progress__container"
+      :style="{ width: width + 'px', height: width + 'px' }"
+    >
+      <svg class="ui-progress-svg" viewBox="0 0 100 100">
+        <path :d="getPathData" stroke="#ebeef5" :stroke-width="getStrokeWidth" fill="none"></path>
+        <path
+          class="circle"
+          :d="getPathData"
+          :stroke="color"
+          :stroke-width="getStrokeWidth"
+          fill="none"
+          stroke-linecap="round"
+          :style="getPathStyle"
+        >
+        </path>
+      </svg>
+      <span class="ui-progress__text">
+        <span v-show="showText">{{ getPercentage }}%</span>
+        <i v-show="!showText" class="i-check"></i>
+      </span>
     </div>
   </div>
 </template>
@@ -56,6 +60,13 @@ export default {
         return ['line', 'circle'].includes(value);
       }
     },
+    // direction: {
+    //   type: String,
+    //   default: 'vertical',
+    //   validator: value => {
+    //     return ['vertical', 'horizontal'].includes(value);
+    //   }
+    // },
     showText: {
       type: Boolean,
       default: true

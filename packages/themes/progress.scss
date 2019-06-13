@@ -1,10 +1,16 @@
 @charset "UTF-8";
 
 .ui-progress.is-line {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  &-bar {
+  min-height: 30px;
+  .ui-progress__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    > .ui-progress__text {
+      padding-left: 8px;
+    }
+  }
+  .ui-progress-bar {
     position: relative;
     width: inherit;
     height: 6px;
@@ -12,18 +18,19 @@
     background-color: $initial-bgcolor-1;
     overflow: hidden;
   }
-  &__inner {
+  .ui-progress__inner {
     width: 0;
-    height: inherit;
+    height: 6px;
     border-radius: inherit;
     background-color: $primary;
+    text-align: right;
+    transition: width .6s ease;
     .ui-progress__text {
-      float: right;
       color: #fff;
     }
   }
-  > .ui-progress__text {
-    padding-left: 8px;
+  .is-horizontal {
+    transform: rotate(-90deg);
   }
 }
 
