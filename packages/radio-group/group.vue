@@ -1,9 +1,3 @@
-<template>
-  <div class="ui-radio-group" :class="{'is-disabled': disabled}">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiRadioGroup',
@@ -21,6 +15,9 @@ export default {
   },
   created() {
     this.$on('radioGroup', this.handleChange);
+  },
+  render() {
+    return <div class={['ui-radio-group', { 'is-disabled': this.disabled }]}>{this.$slots.default}</div>;
   },
   methods: {
     handleChange(value) {

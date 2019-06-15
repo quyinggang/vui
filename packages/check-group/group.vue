@@ -1,9 +1,3 @@
-<template>
-  <div class="ui-checkbox-group">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiCheckboxGroup',
@@ -21,6 +15,9 @@ export default {
   },
   created() {
     this.$on('checkboxValueChange', this.handleChange);
+  },
+  render() {
+    return <div class="ui-checkbox-group">{this.$slots.default}</div>;
   },
   methods: {
     handleChange(value) {

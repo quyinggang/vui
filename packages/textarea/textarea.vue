@@ -1,31 +1,3 @@
-<template>
-  <div
-    class="ui-textarea"
-    :class="[
-      { 'is-focus': isFocus },
-      { 'is-readonly': readonly },
-      { 'is-disabled': disabled },
-      'is-' + getResize
-    ]"
-  >
-    <textarea
-      class="ui-textarea--origin ui-textarea__inner"
-      type="textarea"
-      v-model="inputValue"
-      :cols="cols"
-      :rows="rows"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :readonly="readonly"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    >
-    </textarea>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiTextarea',
@@ -84,6 +56,57 @@ export default {
     inputValue(newVal) {
       this.handleChange(newVal);
     }
+  },
+  render() {
+    const {
+      getResize,
+      isFocus,
+      readonly,
+      disabled,
+      cols,
+      rows,
+      placeholder,
+      maxlength,
+      minlength,
+      inputValue
+    } = this;
+    const containerData = {
+      class: [
+        'ui-textarea',
+        { 'is-focus': isFocus },
+        { 'is-readonly': readonly },
+        { 'is-disabled': disabled },
+        `is-${getResize}`
+      ]
+    };
+    const textareaData = {
+      class: ['ui-textarea--origin', 'ui-textarea__inner'],
+      attrs: {
+        type: 'textarea',
+        cols,
+        rows,
+        disabled,
+        placeholder,
+        maxlength,
+        minlength,
+        readonly
+      },
+      domProps: {
+        value: inputValue
+      },
+      on: {
+        input: e => {
+          this.inputValue = e.target.value;
+        },
+        focus: this.handleFocus,
+        blur: this.handleBlur
+      }
+    };
+    return (
+      <div {...containerData}>
+        <textarea {...textareaData} />
+      </div>
+    );
   },
   methods: {
     handleFocus() {

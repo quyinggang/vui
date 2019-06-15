@@ -1,25 +1,3 @@
-<template>
-  <div
-    class="ui-switch"
-    :class="[
-      isActive ? 'is-active' : 'is-inactive',
-      { 'is-disabled': disabled }
-    ]">
-    <span
-      class="ui-switch__container"
-      @click.stop="handleSwitchChange"
-      :style="getStyle"
-    >
-      <span class="ui-switch__bar"></span>
-    </span>
-    <transition name="slide" mode="out-in">
-      <span :key="value === activeValue ? 'active' : 'inactive'" class="ui-switch__text">
-        {{ value === activeValue ? activeText : inactiveText }}
-      </span>
-    </transition>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiSwitch',
@@ -60,8 +38,34 @@ export default {
       };
     }
   },
+  render() {
+    const {
+      isActive,
+      getStyle,
+      activeText,
+      inactiveText,
+      disabled
+    } = this;
+    return (
+      <div class={['ui-switch', isActive ? 'is-active' : 'is-inactive', { 'is-disabled': disabled }]}>
+        <span
+          class="ui-switch__container"
+          onClick={this.handleSwitchChange}
+          style={getStyle}
+        >
+          <span class="ui-switch__bar"></span>
+        </span>
+        <transition name="slide" mode="out-in">
+          <span key={isActive ? 'active' : 'inactive'} class="ui-switch__text">
+            {isActive ? activeText : inactiveText}
+          </span>
+        </transition>
+      </div>
+    );
+  },
   methods: {
-    handleSwitchChange() {
+    handleSwitchChange(e) {
+      e.stopPropagation();
       if (this.disabled) return;
       const activeValue = this.activeValue;
       const inactiveValue = this.inactiveValue;

@@ -9,6 +9,7 @@
   >
     <span :class="['ui-checkbox__input',{ 'is-checked': isChecked }]">
       <span class="ui-checkbox__inner"></span>
+      <!-- Vue提供的true-value和false-value -->
       <input
         class="ui-checkbox--origin"
         v-if="!uiCheckboxGroup"
@@ -46,8 +47,14 @@ export default {
   props: {
     value: [String, Number, Boolean],
     label: [String, Number, Boolean],
-    trueLabel: [String, Number],
-    falseLabel: [String, Number],
+    trueLabel: {
+      type: [String, Number, Boolean],
+      default: true
+    },
+    falseLabel: {
+      type: [String, Number, Boolean],
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -78,6 +85,7 @@ export default {
     inputValue: {
       get() {
         const parent = this.uiCheckboxGroup;
+        // Vue底层对checkbox做了特殊处理
         // 利用checkbox v-model为数组时，会自动去除数组中对应的checkbox value值
         return parent ? parent.value : this.value;
       },

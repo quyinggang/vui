@@ -1,9 +1,3 @@
-<template>
-  <aside class="ui-aside" :style="{width: width}">
-    <slot></slot>
-  </aside>
-</template>
-
 <script>
 export default {
   name: 'UiAside',
@@ -12,6 +6,15 @@ export default {
       type: String,
       default: '200px'
     }
+  },
+  render() {
+    const data = {
+      'class': ['ui-aside'],
+      style: {
+        width: this.width
+      }
+    };
+    return <aside {...data}>{this.$slots.default}</aside>;
   }
 };
 </script>

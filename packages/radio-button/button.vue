@@ -1,9 +1,3 @@
-<template>
-  <ui-radio class="ui-radio-button" :label="label" :disabled="isDisabled">
-    <slot></slot>
-  </ui-radio>
-</template>
-
 <script>
 export default {
   name: 'UiRadioButton',
@@ -24,6 +18,17 @@ export default {
       const parent = this.uiRadioGroup;
       return (parent && parent.disabled) || this.disabled;
     }
+  },
+  render() {
+    const { label, isDisabled } = this;
+    const data = {
+      class: ['ui-radio-button'],
+      props: {
+        label,
+        disabled: isDisabled
+      }
+    };
+    return <ui-radio {...data}>{this.$slots.default}</ui-radio>;
   }
 };
 </script>

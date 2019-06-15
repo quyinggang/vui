@@ -1,9 +1,3 @@
-<template>
-  <div class="ui-button-group">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiButtonGroup',
@@ -17,6 +11,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  render() {
+    return <div class="ui-button-group">{this.$slots.default}</div>;
   }
 };
 </script>

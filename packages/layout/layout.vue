@@ -1,9 +1,3 @@
-<template>
-  <div class="ui-layout" :class="['is-' + direction]">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiLayout',
@@ -15,6 +9,9 @@ export default {
         return ['vertical', 'horizontal'].includes(value);
       }
     }
+  },
+  render() {
+    return <div class={['ui-layout', `is-${this.direction}`]}>{this.$slots.default}</div>;
   }
 };
 </script>

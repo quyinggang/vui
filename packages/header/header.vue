@@ -1,9 +1,3 @@
-<template>
-  <header class="ui-header" :class="['is-' + align]" :style="{height: height}">
-    <slot></slot>
-  </header>
-</template>
-
 <script>
 export default {
   name: 'UiHeader',
@@ -19,6 +13,13 @@ export default {
         return ['center', 'left', 'right'].includes(value);
       }
     }
+  },
+  render() {
+    const data = {
+      class: ['ui-header', `is-${this.align}`],
+      style: { height: this.height }
+    };
+    return <header {...data}>{this.$slots.default}</header>;
   }
 };
 </script>

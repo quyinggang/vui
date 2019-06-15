@@ -1,9 +1,3 @@
-<template>
-  <footer class="ui-footer" :class="['is-' + align]" :style="{height: height}">
-    <slot></slot>
-  </footer>
-</template>
-
 <script>
 export default {
   name: 'UiFooter',
@@ -19,6 +13,15 @@ export default {
         return ['center', 'left', 'right'].includes(value);
       }
     }
+  },
+  render() {
+    const data = {
+      class: ['ui-footer', `is-${this.align}`],
+      style: {
+        height: this.height
+      }
+    };
+    return <footer {...data}>{this.$slots.default}</footer>;
   }
 };
 </script>

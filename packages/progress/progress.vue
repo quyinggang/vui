@@ -1,47 +1,3 @@
-<template>
-  <div class="ui-progress" :class="['is-' + type]">
-    <div v-show="type === 'line'" class="ui-progress__container">
-      <div class="ui-progress-bar">
-        <div
-          class="ui-progress__inner"
-          :style="{backgroundcolor: color, width: getPercentage + '%'}"
-        >
-          <span class="ui-progress__text" v-show="showText && textInside">
-            {{ getPercentage }}%
-          </span>
-        </div>
-      </div>
-      <span class="ui-progress__text" v-show="!textInside">
-        <span v-show="showText">{{ getPercentage }}%</span>
-        <i v-show="!showText" class="i-check"></i>
-      </span>
-    </div>
-    <div
-      v-show="type === 'circle'"
-      class="ui-progress__container"
-      :style="{ width: width + 'px', height: width + 'px' }"
-    >
-      <svg class="ui-progress-svg" viewBox="0 0 100 100">
-        <path :d="getPathData" stroke="#ebeef5" :stroke-width="getStrokeWidth" fill="none"></path>
-        <path
-          class="circle"
-          :d="getPathData"
-          :stroke="color"
-          :stroke-width="getStrokeWidth"
-          fill="none"
-          stroke-linecap="round"
-          :style="getPathStyle"
-        >
-        </path>
-      </svg>
-      <span class="ui-progress__text">
-        <span v-show="showText">{{ getPercentage }}%</span>
-        <i v-show="!showText" class="i-check"></i>
-      </span>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiProgress',
@@ -60,13 +16,6 @@ export default {
         return ['line', 'circle'].includes(value);
       }
     },
-    // direction: {
-    //   type: String,
-    //   default: 'vertical',
-    //   validator: value => {
-    //     return ['vertical', 'horizontal'].includes(value);
-    //   }
-    // },
     showText: {
       type: Boolean,
       default: true
@@ -116,6 +65,89 @@ export default {
         strokeDashoffset: `${offset}px`
       };
     }
+  },
+  render() {
+    const {
+      type,
+      showText,
+      textInside,
+      getPathData,
+      getStrokeWidth,
+      getPathStyle,
+      width,
+      getPercentage,
+      color
+    } = this;
+    return (
+      <div class={`ui-progress is-${type}`}>
+        {
+          type === 'line' && (
+            <div class="ui-progress__container">
+              <div class="ui-progress-bar">
+                <div
+                  class="ui-progress__inner"
+                  style={
+                    {
+                      backgroundcolor: color,
+                      width: getPercentage + '%'
+                    }
+                  }
+                >
+                  {
+                    showText && textInside
+                      ? <span class="ui-progress__text">{getPercentage}%</span>
+                      : ''
+                  }
+                </div>
+              </div>
+              {
+                !textInside && (
+                  <span class="ui-progress__text">
+                    {
+                      showText ? `${getPercentage}px` : <i class="i-check" />
+                    }
+                  </span>
+                )
+              }
+            </div>
+          )
+        }
+        {
+          type === 'circle' && (
+            <div
+              class="ui-progress__container"
+              style={
+                { width: `${width}px`, height: `${width}px` }
+              }
+            >
+              <svg class="ui-progress-svg" viewBox="0 0 100 100">
+                <path
+                  d={getPathData}
+                  stroke="#ebeef5"
+                  stroke-width={getStrokeWidth}
+                  fill="none">
+                </path>
+                <path
+                  class="circle"
+                  d={getPathData}
+                  stroke={color}
+                  stroke-width={getStrokeWidth}
+                  fill="none"
+                  stroke-linecap="round"
+                  style={getPathStyle}
+                >
+                </path>
+              </svg>
+              <span class="ui-progress__text">
+                {
+                  showText ? `${getPercentage}%` : <i class="i-check" />
+                }
+              </span>
+            </div>
+          )
+        }
+      </div>
+    );
   }
 };
 </script>

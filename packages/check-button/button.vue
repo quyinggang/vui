@@ -1,9 +1,3 @@
-<template>
-  <ui-checkbox class="ui-checkbox-button" :label="label" :disabled="isDisabled">
-    <slot></slot>
-  </ui-checkbox>
-</template>
-
 <script>
 export default {
   name: 'UiCheckboxButton',
@@ -24,6 +18,16 @@ export default {
       const parent = this.uiCheckboxGroup;
       return parent ? parent.disabled : this.disabled;
     }
+  },
+  render() {
+    const data = {
+      'class': ['ui-checkbox-button'],
+      props: {
+        label: this.label,
+        disabled: this.isDisabled
+      }
+    };
+    return <ui-checkbox {...data}>{this.$slots.default}</ui-checkbox>;
   }
 };
 </script>

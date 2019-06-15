@@ -1,21 +1,3 @@
-<template>
-  <button
-    class="ui-button"
-    :class="[
-      type ? 'ui-button--' + type : '',
-      size ? 'ui-button--' + size : '',
-      { 'is-round': round },
-      { 'is-circle': circle },
-      { 'is-disabled': isDisabled }
-    ]"
-    :disabled="isDisabled"
-    @click="handleBtnClick"
-  >
-    <i :class="icon"></i>
-    <slot></slot>
-  </button>
-</template>
-
 <script>
 export default {
   name: 'UiButton',
@@ -60,6 +42,26 @@ export default {
       const parent = this.uiButtonGroup;
       return (parent && parent.disabled) || this.disabled;
     }
+  },
+  render() {
+    const { type, size, round, circle, isDisabled, icon } = this;
+    const data = {
+      class: [
+        'ui-button',
+        type ? 'ui-button--' + type : '',
+        size ? 'ui-button--' + size : '',
+        { 'is-round': round },
+        { 'is-circle': circle },
+        { 'is-disabled': isDisabled }
+      ],
+      attrs: {
+        disabled: isDisabled
+      },
+      on: {
+        click: this.handleBtnClick
+      }
+    };
+    return <button {...data}><i class={icon}></i>{this.$slots.default}</button>;
   },
   methods: {
     handleBtnClick() {

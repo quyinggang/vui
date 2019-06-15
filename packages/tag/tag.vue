@@ -1,20 +1,3 @@
-<template>
-  <transition name="fade-out">
-    <span
-      class="ui-tag"
-      :class="[
-        'is-' + type,
-        { 'is-closeable': closeable }
-      ]"
-    >
-      <slot></slot>
-      <span v-show="closeable" class="icon--close" @click="handleClose">
-        <i class="i-close"></i>
-      </span>
-    </span>
-  </transition>
-</template>
-
 <script>
 export default {
   name: 'UiTag',
@@ -31,8 +14,26 @@ export default {
       default: false
     }
   },
+  render() {
+    const { type, closeable } = this;
+    return (
+      <transition name="fade-out">
+        <span class={['ui-tag', `is-${type}`, { 'is-closeable': closeable }]}>
+          {this.$slots.default}
+          {
+            closeable && (
+              <span class="icon--close" onClick={this.handleClose}>
+                <i class="i-close"></i>
+              </span>
+            )
+          }
+        </span>
+      </transition>
+    );
+  },
   methods: {
-    handleClose() {
+    handleClose(e) {
+      e.stopPropagation();
       this.$emit('close');
     }
   }

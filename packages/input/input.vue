@@ -1,45 +1,3 @@
-<template>
-  <div class="ui-input-container" :class="{ 'is-compound': $slots.prepend || $slots.append}">
-    <div class="ui-input__prepend">
-      <slot name="prepend"></slot>
-    </div>
-    <div
-      class="ui-input"
-      :class="{
-        'is-focus': isFocus,
-        'is-readonly': readonly,
-        'is-disabled': disabled,
-        'is-prepend' : $slots.prepend,
-        'is-append': $slots.append
-      }"
-    >
-      <span class="icon--prefix">
-        <i :class="prefixIcon"></i>
-        <slot name="prefix"></slot>
-      </span>
-      <input
-        class="ui-input--origin ui-input__inner"
-        :type="type"
-        v-model="inputValue"
-        :disabled="disabled"
-        :placeholder="placeholder"
-        :maxlength="maxlength"
-        :minlength="minlength"
-        :readonly="readonly"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      >
-      <span class="icon--suffix">
-        <i :class="suffixIcon"></i>
-        <slot name="suffix"></slot>
-      </span>
-    </div>
-    <div class="ui-input__append">
-      <slot name="append"></slot>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'UiInput',
@@ -85,6 +43,69 @@ export default {
     inputValue(newVal) {
       this.handleChange(newVal);
     }
+  },
+  render() {
+    const {
+      isFocus,
+      readonly,
+      disabled,
+      $slots,
+      prefixIcon,
+      type,
+      inputValue,
+      suffixIcon,
+      minlength,
+      maxlength,
+      placeholder
+    } = this;
+    const inputData = {
+      class: {
+        'ui-input': true,
+        'is-focus': isFocus,
+        'is-readonly': readonly,
+        'is-disabled': disabled,
+        'is-prepend': $slots.prepend,
+        'is-append': $slots.append
+      }
+    };
+    const inputOriginData = {
+      class: 'ui-input--origin ui-input__inner',
+      attrs: {
+        type,
+        disabled,
+        maxlength,
+        minlength,
+        readonly,
+        placeholder
+      },
+      domProps: {
+        value: inputValue
+      },
+      on: {
+        input: e => {
+          this.inputValue = e.target.value;
+        },
+        focus: this.handleFocus,
+        blur: this.handleBlur
+      }
+    };
+    return (
+      <div class={['ui-input-container', { 'is-compound': $slots.prepend || $slots.append }]}>
+        <div class="ui-input__prepend">{$slots.prepend}</div>
+        <div {...inputData}>
+          <span class="icon--prefix">
+            <i class={prefixIcon}></i>
+            {$slots.prefix}
+          </span>
+          <input {...inputOriginData} />
+          <span class="icon--suffix">
+            <i class={suffixIcon}></i>
+            {$slots.suffix}
+          </span>
+        </div>
+        <div class="ui-input__append">{$slots.append}</div>
+      </div>
+    );
   },
   methods: {
     handleFocus(e) {

@@ -92,12 +92,14 @@ $radius: 4px;
     &:last-child {
       border-top-right-radius: $radius;
       border-bottom-right-radius: $radius;
-      border-left: none;
     }
+  }
+  .ui-button + .ui-button {
+    border-left: none;
   }
 }
 
-.ui-button--disabled {
+.ui-button.is-disabled {
   color: $disabled-color;
   background-color: $initial-bgcolor;
   border-color: $disabled-bdcolor;
