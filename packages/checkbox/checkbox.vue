@@ -100,7 +100,7 @@ export default {
       this.$nextTick(() => {
         const parent = this.uiCheckboxGroup;
         const value = this.inputValue;
-        parent && parent.$emit('checkboxValueChange', value);
+        parent && parent.$emit('_checkboxChange', value);
         this.$emit('change', value);
       });
     }

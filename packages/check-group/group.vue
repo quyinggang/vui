@@ -14,7 +14,7 @@ export default {
     }
   },
   created() {
-    this.$on('checkboxValueChange', this.handleChange);
+    this.$on('_checkboxChange', this.handleChange);
   },
   render() {
     return <div class="ui-checkbox-group">{this.$slots.default}</div>;

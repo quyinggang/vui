@@ -1,7 +1,8 @@
 <template>
   <div class="section--component">
-    {{ inputValue }}
+    {{ percentage }}
     <ui-input v-model="inputValue"></ui-input>
+    <ui-slider v-model="percentage" left-text="0" right-text="100" />
   </div>
 </template>
 
