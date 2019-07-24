@@ -1,8 +1,9 @@
 <template>
   <div class="section--component">
     {{ percentage }}
-    <ui-input v-model="inputValue"></ui-input>
-    <ui-slider v-model="percentage" left-text="0" right-text="100" />
+    <ui-upload action="https://jsonplaceholder.typicode.com/posts/">
+      <ui-button type="primary">上传</ui-button>
+    </ui-upload>
   </div>
 </template>
 

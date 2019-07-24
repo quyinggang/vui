@@ -17,6 +17,7 @@ import Slider from '../packages/slider/index.js';
 import Switch from '../packages/switch/index.js';
 import Tag from '../packages/tag/index.js';
 import Textarea from '../packages/textarea/index.js';
+import Upload from '../packages/upload/index.js';
 
 const components = [
   Aside,
@@ -37,7 +38,8 @@ const components = [
   Slider,
   Switch,
   Tag,
-  Textarea
+  Textarea,
+  Upload
 ];
 
 function install(Vue) {
@@ -70,5 +72,6 @@ export default {
   Slider,
   Switch,
   Tag,
-  Textarea
+  Textarea,
+  Upload
 };
