@@ -55,7 +55,7 @@ export default {
         >
           <span class="ui-switch__bar"></span>
         </span>
-        <transition name="slide" mode="out-in">
+        <transition name="switch-slide" mode="out-in">
           <span key={isActive ? 'active' : 'inactive'} class="ui-switch__text">
             {isActive ? activeText : inactiveText}
           </span>

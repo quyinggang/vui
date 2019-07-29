@@ -6,46 +6,39 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      focusing: false
+    };
+  },
   render() {
-    let fileList = JSON.parse(JSON.stringify(this.fileList));
-    fileList = fileList.map(item => {
-      item.isFocus = false;
-      return item;
-    });
-    console.log(fileList);
     return (
-      <ul class="ui-upload__list">
+      <transition-group class="ui-upload__list" name="upload-slide" tag="ul">
         {
-          fileList.map(file => {
+          this.fileList.map(file => {
             return (
-              <li
-                class={['li', {'is-focus': file.isFocus}]}
-                on-focus={() => this.handleFocus(file)}
-              >
-                <span class="icon">
-                  <i class="i-brush"/>
+              <li key={file.uid} class="li">
+                <span class="span--name">
+                  <i class="icon i-brush"/>
+                  <span on-click={() => this.handlePreview(file)}>{file.name}</span>
                 </span>
-                <span on-click={() => this.handlePreview(file)}>{file.name}</span>
-                <span class="icon" on-click={() => this.handleRemove(file)}>
-                  <i class="i-check-circle-outline" />
+                <span class="icon--status" on-click={() => this.handleRemove(file)}>
+                  <i class="icon--success i-check-circle" />
+                  <i class="icon--close i-close" />
                 </span>
               </li>
             );
           })
         }
-      </ul>
+      </transition-group>
     );
   },
   methods: {
-    handleFocus(file) {
-      const { isFocus } = file;
-      file.isFocus = !isFocus;
-    },
     handlePreview(file) {
-      this.onPreview(file);
+      this.$emit('preview', file);
     },
     handleRemove(file) {
-      this.onRemove(file);
+      this.$emit('remove', file);
     }
   }
 };

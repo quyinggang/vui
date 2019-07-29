@@ -8,14 +8,35 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     .li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       height: 25px;
       line-height: 25px;
       margin-top: 10px;
       cursor: pointer;
+      .icon--close {
+        display: none;
+      }
+      .icon--success {
+        color: $success;
+      }
       &:hover {
         color: $success;
         background-color: $disabled-bgcolor;
+        .icon--close {
+          display: inline;
+        }
+        .icon--success {
+          display: none;
+        }
+      }
+    }
+    .span--name {
+      .icon {
+        padding-right: 15px;
       }
     }
   }

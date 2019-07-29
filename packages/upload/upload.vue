@@ -54,6 +54,14 @@ export default {
       type: Function,
       default: noop
     },
+    onBeforeRemove: {
+      type: Function,
+      default: noop
+    },
+    onRemove: {
+      type: Function,
+      default: noop
+    },
     httpRequest: {
       type: Function,
       default: ajax
@@ -88,7 +96,10 @@ export default {
         <div class="ui-upload__tooltip">
           {$slots.tip}
         </div>
-        <List file-list={this.fileList} />
+        <List
+          file-list={this.fileList}
+          on-remove={this.handleRemove}
+        />
       </div>
     );
   },
@@ -96,9 +107,6 @@ export default {
     handleFileChange(e) {
       const files = e.target.files;
       if (!files) return;
-      this.uploadFiles(files);
-    },
-    uploadFiles(files) {
       const fileList = Array.prototype.slice.call(files);
       fileList.forEach(rawFile => {
         const file = this.formatFile(rawFile);
@@ -119,18 +127,15 @@ export default {
       return formatFile;
     },
     handleBeforeUpload(file) {
-      if (this.onBeforeUpload === noop) {
-        this.upload(file);
-        return;
-      }
       const checkRes = this.onBeforeUpload(file);
       if (checkRes instanceof Promise) {
         checkRes.then(() => this.upload(file));
       } else {
-        !!checkRes && this.upload(file);
+        (!!checkRes || this.onBeforeUpload === noop) && this.upload(file);
       }
     },
     upload(file) {
+      const vm = this;
       const fileList = this.fileList;
       const options = {
         headers: this.headers,
@@ -139,13 +144,13 @@ export default {
         withCredentials: this.withCredentials,
         file,
         onError(err) {
-          this.onError(err, file, fileList);
+          vm.onError(err, file, fileList);
         },
         onSuccess(response) {
-          this.onSuccess(response, file, fileList);
+          vm.onSuccess(response, file, fileList);
         },
         onProgress(e) {
-          this.onProgress(e, file, fileList);
+          vm.onProgress(e, file, fileList);
         }
       };
       this.httpRequest(options);
@@ -153,9 +158,25 @@ export default {
     handleInput() {
       if (this.disabled) return;
       const input = this.$refs['file'];
-      // 保证每次上传都会触发上传逻辑
+      // 避免相同文件上传不触发change事件
       input.value = null;
       input.click();
+    },
+    handleRemove(file) {
+      const remove = () => {
+        const fileList = this.fileList;
+        const index = fileList.indexOf(file);
+        if (index >= 0) {
+          fileList.splice(index, 1);
+          this.onRemove(file);
+        }
+      };
+      const checkRes = this.onBeforeRemove(file);
+      if (checkRes instanceof Promise) {
+        checkRes.then(() => remove());
+      } else {
+        (!!checkRes || this.onBeforeRemove === noop) && remove();
+      }
     }
   }
 };

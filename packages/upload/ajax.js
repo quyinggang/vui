@@ -27,6 +27,6 @@ export default function upload(options) {
   });
   formData.append('file', file.binaryFile, file.name);
 
-  xhr.open('post', options.action, null);
+  xhr.open('post', options.action);
   xhr.send(formData);
 }
