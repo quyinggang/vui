@@ -1,6 +1,5 @@
 <template>
   <div class="section--component">
-    {{ percentage }}
     <ui-upload action="https://jsonplaceholder.typicode.com/posts/">
       <ui-button type="primary">上传</ui-button>
     </ui-upload>

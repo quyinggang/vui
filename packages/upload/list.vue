@@ -17,15 +17,21 @@ export default {
         {
           this.fileList.map(file => {
             return (
-              <li key={file.uid} class="li">
-                <span class="span--name">
-                  <i class="icon i-brush"/>
-                  <span on-click={() => this.handlePreview(file)}>{file.name}</span>
-                </span>
-                <span class="icon--status" on-click={() => this.handleRemove(file)}>
-                  <i class="icon--success i-check-circle" />
-                  <i class="icon--close i-close" />
-                </span>
+              <li key={file.uid}>
+                <p class="content">
+                  <span class="span--name">
+                    <i class="icon i-brush"/>
+                    <span on-click={() => this.handlePreview(file)}>{file.name}</span>
+                  </span>
+                  {
+                    file.status === 'success' &&
+                      <span class="icon--status" on-click={() => this.handleRemove(file)}>
+                        <i class="icon--success i-check-circle" />
+                        <i class="icon--close i-close" />
+                      </span>
+                  }
+                </p>
+                <ui-progress show-text={false} percentage={file.percentage} size="mini" />
               </li>
             );
           })

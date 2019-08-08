@@ -16,6 +16,13 @@ export default {
         return ['line', 'circle'].includes(value);
       }
     },
+    size: {
+      type: String,
+      default: 'small',
+      validator: value => {
+        return ['mini', 'small', 'medium'].includes(value);
+      }
+    },
     showText: {
       type: Boolean,
       default: true
@@ -69,6 +76,7 @@ export default {
   render() {
     const {
       type,
+      size,
       showText,
       textInside,
       getPathData,
@@ -83,7 +91,7 @@ export default {
         {
           type === 'line' && (
             <div class="ui-progress__container">
-              <div class="ui-progress-bar">
+              <div class={`ui-progress-bar is-${size}`}>
                 <div
                   class="ui-progress__inner"
                   style={
@@ -104,7 +112,7 @@ export default {
                 !textInside && (
                   <span class="ui-progress__text">
                     {
-                      showText ? `${getPercentage}px` : <i class="i-check" />
+                      showText ? `${getPercentage}%` : null
                     }
                   </span>
                 )

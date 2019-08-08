@@ -4,6 +4,7 @@ export default function upload(options) {
 
   // 处理上传失败
   xhr.onerror = function(err) {
+    file.status = 'error';
     options.onError(err);
   };
   // 上传中
@@ -18,6 +19,8 @@ export default function upload(options) {
   // 上传请求成功
   xhr.onload = function(e) {
     const res = e.target;
+    file.status = 'success';
+    file.percentage = 100;
     options.onSuccess(res.response);
   };
 

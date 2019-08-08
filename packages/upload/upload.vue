@@ -144,6 +144,7 @@ export default {
         withCredentials: this.withCredentials,
         file,
         onError(err) {
+          vm.spliceFileFromList(file);
           vm.onError(err, file, fileList);
         },
         onSuccess(response) {
@@ -162,14 +163,18 @@ export default {
       input.value = null;
       input.click();
     },
+    spliceFileFromList(file) {
+      const fileList = this.fileList;
+      const index = fileList.indexOf(file);
+      if (index >= 0) {
+        fileList.splice(index, 1);
+      }
+      return index >= 0;
+    },
     handleRemove(file) {
       const remove = () => {
-        const fileList = this.fileList;
-        const index = fileList.indexOf(file);
-        if (index >= 0) {
-          fileList.splice(index, 1);
-          this.onRemove(file);
-        }
+        const isSplice = this.spliceFileFromList(file);
+        isSplice && this.onRemove(file);
       };
       const checkRes = this.onBeforeRemove(file);
       if (checkRes instanceof Promise) {

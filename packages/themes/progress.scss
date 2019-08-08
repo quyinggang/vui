@@ -17,10 +17,16 @@
     border-radius: 4px;
     background-color: $initial-bgcolor-1;
     overflow: hidden;
+    &.is-mini {
+      height: 2px;
+    }
+    &.is-medium {
+      height: 10px;
+    }
   }
   .ui-progress__inner {
     width: 0;
-    height: 6px;
+    height: inherit;
     border-radius: inherit;
     background-color: $primary;
     text-align: right;

@@ -9,13 +9,13 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    .li {
+    .content {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 25px;
       line-height: 25px;
-      margin-top: 10px;
+      margin-bottom: 0;
       cursor: pointer;
       .icon--close {
         display: none;
