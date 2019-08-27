@@ -5,13 +5,14 @@ export default function upload(options) {
   // 处理上传失败
   xhr.onerror = function(err) {
     file.status = 'error';
+    file.percentage = 0;
     options.onError(err);
   };
   // 上传中
   if (xhr.upload) {
     xhr.upload.onprogress = function(e) {
       file.status = 'uploading';
-      file.percentage = null;
+      file.percentage = parseInt((e.loaded / e.total) * 100, 10);
       options.onProgress(e);
     };
   }

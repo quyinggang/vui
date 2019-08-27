@@ -6,11 +6,6 @@ export default {
       default: () => []
     }
   },
-  data() {
-    return {
-      focusing: false
-    };
-  },
   render() {
     return (
       <transition-group class="ui-upload__list" name="upload-slide" tag="ul">
@@ -24,14 +19,20 @@ export default {
                     <span on-click={() => this.handlePreview(file)}>{file.name}</span>
                   </span>
                   {
-                    file.status === 'success' &&
-                      <span class="icon--status" on-click={() => this.handleRemove(file)}>
+                    file.status === 'success'
+                      ? <span class="icon--status" on-click={() => this.handleRemove(file)}>
                         <i class="icon--success i-check-circle" />
                         <i class="icon--close i-close" />
                       </span>
+                      : file.status === 'uploading'
+                        ? `${file.percentage}%`
+                        : null
                   }
                 </p>
-                <ui-progress show-text={false} percentage={file.percentage} size="mini" />
+                {
+                  file.status === 'uploading' &&
+                    <ui-progress show-text={false} percentage={file.percentage} size="mini" />
+                }
               </li>
             );
           })
