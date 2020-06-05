@@ -92,9 +92,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         collapseWhitespace: true,
         // 属性双引号
         removeAttributeQuotes: true
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      }
     })
   ]
 })

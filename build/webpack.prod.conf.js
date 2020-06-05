@@ -9,8 +9,10 @@ const baseWebpackConfig = require('./webpack.base.conf')
 // 压缩JS插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
     // 入口
   entry: {
     app: './src/index.js'
@@ -23,22 +25,21 @@ const webpackConfig = merge(baseWebpackConfig, {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true
+      })
+    ]
+  },
   plugins: [
     // 编译进度插件
     new ProgressBarPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    // JS压缩
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
-    })
+    new FriendlyErrorsWebpackPlugin()
   ]
 })
 

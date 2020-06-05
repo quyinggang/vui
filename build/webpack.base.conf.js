@@ -4,6 +4,8 @@
  */
 const path = require('path');
 const config = require('./env-config');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 
 function assetsPath(_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -28,7 +30,7 @@ const createLintingRule = () => ({
   // enforce: pre | post, loader使用优先级定义，定义了pre会优先于其他同类型相同模块使用loader解析
   enforce: 'pre',
   // include表示必须匹配的目录
-  include: [resolve('src'), resolve('test')],
+  include: [resolve('src'), resolve('packages'), resolve('examples')],
   options: {
     // eslint-friendly-formatter插件会将eslint详细输出到控制台
     formatter: require('eslint-friendly-formatter'),
@@ -57,6 +59,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+        include: [resolve('packages'), resolve('examples')],
         options: {
           sourceMap: sourceMap,
           // vue-loader参数：是否开启CSS source maps
@@ -75,8 +78,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        loader: 'babel-loader?cacheDirectory=true',
+        include: [resolve('src'), resolve('packages')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -99,5 +102,8 @@ module.exports = {
         loader: ['style-loader', 'css-loader', 'sass-loader']
       },
     ]
-  }
+  },
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 };

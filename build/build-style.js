@@ -11,10 +11,7 @@ gulp.task('compile', function() {
   return gulp.src('../packages/themes/index.scss')
     .pipe(sass.sync())
     // 浏览器前缀兼容处理
-    .pipe(autoprefixer({
-      browsers: ['ie > 9', 'last 2 versions'],
-      cascade: false
-    }))
+    .pipe(autoprefixer({ cascade: false }))
     // css压缩
     .pipe(cssmin())
     // 输出目录
